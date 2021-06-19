@@ -1,13 +1,8 @@
-def Datex():
-    print("$ $ $ $ $ $ $ ")
-    print("      $   ")
-    print("      $   ")
-    print("      $   ")
-    print("      $   ")
-    print("      $   ")
-    print("      $   ")
+def Datex(status):
+    print("$ date x $ ")
     print(" $ $ $  ",end="\n\n")
     print("J for Jessica!!!, Pm baako pe no size!!!")
     print("mooooooodzzzzzzzz!!!!")
+    
 
 Datex()
