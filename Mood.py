@@ -4,5 +4,6 @@ def Datex(status):
     print("J for Jessica!!!, Pm baako pe no size!!!")
     print("mooooooodzzzzzzzz!!!!")
     print("Otafregya!!!!")
+    print("Simple kamakama")
 
 Datex()
