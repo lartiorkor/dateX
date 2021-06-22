@@ -5,5 +5,6 @@ def Datex(status):
     print("mooooooodzzzzzzzz!!!!")
     print("Otafregya!!!!")
     print("Simple kamakama")
+    print("greetings_earthlings_we_come_in_peace.")
 
 Datex()
