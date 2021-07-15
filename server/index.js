@@ -4,7 +4,8 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 
-const conversationsRoute = require("./router/conversation")
+const conversationsRoute = require("./router/conversation");
+const messagesRoute = require("./router/messages");
 
 // initializing server
 const app = express();
@@ -23,6 +24,7 @@ app.use(helmet());
 app.use(morgan("common"));
 
 app.use("/api/conversations", conversationsRoute);
+app.use("/api/messages", messagesRoute);
 
 app.listen(3000, () => {
     console.log("Server running, on port 9000...")

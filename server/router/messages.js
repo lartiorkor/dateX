@@ -2,13 +2,27 @@ const router = require('express').Router();
 const Message = require("../models/Message");
 
 //new Conv
-router.post('/', (req, res) => {
-    const newMessage = new Message({
-        members: [req.body.senderId, req.body.receiverId],
-    });
+router.post('/', async (req, res) => {
+    const newMessage = new Message(req.body);
+    try {
+        const savedMessage = await newMessage.save();
+        res.status(200).json(savedMessage);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 //get convo of a user
+router.get("/:conversationId", async (req, res) => {
+    try {
+        const messages = await Message.find({
+            conversationId: req.params.conversationId
+        });
+        res.status(200).json(messages);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
 
 
 module.exports = router;
