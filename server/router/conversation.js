@@ -18,28 +18,20 @@ router.post('/', async (req, res) => {
 
 //get convo of a user
 router.get('/:userId', async (req, res) => {
-    // try {
-    //     const conversation = await Conversation.find({
-    //         members: { $in: [req.params.userId] },
-    //     });
-    //     res.status(200).json(conversation);
-    // } catch (err) {
-    //     res.status(500).json(err);
-    // }
-
+    const userId = req.params.userId;
+    const sql = `SELECT * FROM conversations WHERE user_one = "${userId}" OR user_two = "${userId}"`;
     try {
-        db.query('SELECT * FROM userAuth', (err, rows) => {
+        db.query(sql, (err, rows) => {
             if (!err) {
                 res.send(rows);
             } else {
-                return console.log(err);
+                res.status(500).send(err);
             }
-        })
-
+        });
 
     } catch (err) {
 
-        console.log(err);
+        es.status(500).send(err);
     }
 })
 
