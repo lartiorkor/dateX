@@ -5,6 +5,9 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import Login from './screens/Login'
 import SignUp from './screens/SignUp'
+import CreateProfile from './screens/CreateProfile'
+import WelcomeScreen from './screens/WelcomeScreen'
+import lightTheme from './Theme/colors'
 
 const Stack = createStackNavigator();
 
@@ -12,13 +15,19 @@ export class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Login'>
+        <Stack.Navigator initialRouteName='Welcome'>
+          <Stack.Screen 
+            name='Welcome' component={WelcomeScreen} options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen name='Login' component={Login} options={{
             headerShown: false
           }}/>
           <Stack.Screen name='SignUp' component={SignUp} options={{
             headerShown: false
           }}/>
+          <Stack.Screen name='Profile' component={CreateProfile}/>
         </Stack.Navigator>
       </NavigationContainer>
     )
