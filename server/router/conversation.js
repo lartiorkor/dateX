@@ -16,15 +16,17 @@ router.post('/', async (req, res) => {
     //     res.status(500).json(err);
     // }
 
-    const body = res.body;
+    const body = req.body;
+    console.log(body);
     const conversation_id = uuidv4();
-    const sql = `INSERT INTO conversations VALUES(
-        ${conversation_id}, ${body.user_one},${body.user_two},"message"
-    )`
+    const sql = `INSERT INTO conversations ( conversation_id, user_one,user_two,conversation_type) VALUES(
+        "${conversation_id}", "${body.user_one}","${body.user_two}","message"
+    ) `
     db.query(sql,(err,rows)=>{
         if(!err){
-            res.send(rows);
+            res.status(200).send(rows);
         }else{
+            console.log(err);
             res.status(500).send(err);
         }
     })

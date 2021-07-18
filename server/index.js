@@ -12,7 +12,7 @@ const messagesRoute = require("./router/messages");
 // initializing server
 const app = express();
 dotenv.config();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 
 
