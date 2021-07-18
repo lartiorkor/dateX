@@ -14,9 +14,7 @@ const app = express();
 dotenv.config();
 const port = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
-    console.log("Connected to MongoDB")
-})
+
 
 
 
