@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Conversation = require("../models/Conversation");
+const { db } = require("../database/db");
 
 //new Conv
 router.post('/', async (req, res) => {
@@ -17,13 +18,28 @@ router.post('/', async (req, res) => {
 
 //get convo of a user
 router.get('/:userId', async (req, res) => {
+    // try {
+    //     const conversation = await Conversation.find({
+    //         members: { $in: [req.params.userId] },
+    //     });
+    //     res.status(200).json(conversation);
+    // } catch (err) {
+    //     res.status(500).json(err);
+    // }
+
     try {
-        const conversation = await Conversation.find({
-            members: { $in: [req.params.userId] },
-        });
-        res.status(200).json(conversation);
+        db.query('SELECT * FROM userAuth', (err, rows) => {
+            if (!err) {
+                res.send(rows);
+            } else {
+                return console.log(err);
+            }
+        })
+
+
     } catch (err) {
-        res.status(500).json(err);
+
+        console.log(err);
     }
 })
 
