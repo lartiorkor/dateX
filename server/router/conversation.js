@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     // }
 
     const body = req.body;
-    console.log(body);
+ 
     const conversation_id = uuidv4();
     const sql = `INSERT INTO conversations ( conversation_id, user_one,user_two,conversation_type) VALUES(
         "${conversation_id}", "${body.user_one}","${body.user_two}","message"

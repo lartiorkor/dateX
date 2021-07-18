@@ -1,26 +1,43 @@
 const router = require('express').Router();
 const Message = require("../models/Message");
+const {v4:uuidv4}=require('uuid');
+const {db}=require("../database/db");
 
 //new Conv
 router.post('/', async (req, res) => {
-    const newMessage = new Message(req.body);
-    try {
-        const savedMessage = await newMessage.save();
-        res.status(200).json(savedMessage);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+    const body = req.body;
+    const messageId = uuidv4();
+
+    const sql = `INSERT INTO messages ( message_id, conversation_id,sender_id,message) VALUES(
+        "${messageId}", "${body.conversationId}","${body.senderId}","${body.message}"
+    ) `
+    db.query(sql,(err,rows)=>{
+        if(!err){
+            res.status(200).send(rows);
+        }else{
+            console.log(err);
+            res.status(500).send(err);
+        }
+    })
 });
 
 //get convo of a user
 router.get("/:conversationId", async (req, res) => {
+    const conversationId = req.params.conversationId;
+    const sql = `SELECT * FROM messages WHERE conversation_id = "${conversationId}"`;
+    console.log(conversationId);
     try {
-        const messages = await Message.find({
-            conversationId: req.params.conversationId
+        db.query(sql, (err, rows) => {
+            if (!err) {
+                res.status(200).send(rows);
+            } else {
+                res.status(500).send(err);
+            }
         });
-        res.status(200).json(messages);
+
     } catch (err) {
-        res.status(500).json(err);
+
+       res.status(500).send(err);
     }
 })
 
