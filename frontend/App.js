@@ -9,6 +9,10 @@ import CreateProfile from './screens/CreateProfile'
 import WelcomeScreen from './screens/WelcomeScreen'
 import lightTheme from './Theme/colors'
 
+import  ChatScreen from './components/chatscreen/ChatScreen';
+import ChatRoomScreen from './components/chatroomscreen/ChatRoomScreen';
+
+
 const Stack = createStackNavigator();
 
 export class App extends Component {
@@ -27,6 +31,14 @@ export class App extends Component {
           <Stack.Screen name='SignUp' component={SignUp} options={{
             headerShown: false
           }}/>
+          <Stack.Screen name='Profile' component={CreateProfile}/>
+          <Stack.Screen name="chatroomscreen"
+            component={ChatRoomScreen}
+            options={ ({route })=> ({title:route.params.itemId})
+               
+           
+            }/>
+          <Stack.Screen name='chatscreen' component={ChatScreen}/>
           <Stack.Screen name='Profile' component={CreateProfile}/>
         </Stack.Navigator>
       </NavigationContainer>

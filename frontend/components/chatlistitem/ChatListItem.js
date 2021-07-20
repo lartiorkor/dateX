@@ -7,7 +7,7 @@ const ChatListItem = ({message}) => {
     return (
        <View style={styles.container}>
             <View style={styles.leftContainer}>
-                <Image style={styles.image} source={require ('../../assets/HeaderThumbnails/1.jpg')}/>
+                <Image style={styles.image} source={require ('../../Assets/1.jpg')}/>
             <View style={styles.midContainer}>
                 <Text style={styles.username}>Nobel Fiawornu</Text>
                 <Text style={styles.lastmessage}>{message}</Text>

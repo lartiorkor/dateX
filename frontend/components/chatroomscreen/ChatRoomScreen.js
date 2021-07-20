@@ -26,7 +26,7 @@ const ChatRoomScreen = ({navigation,route}) => {
    
         
     return (
-        <ImageBackground style={{width:'100%', height:'100%'}} source={require('../../assets/BG.png')}>
+        <ImageBackground style={{width:'100%', height:'100%'}} source={require('../../Assets/BG.png')}>
          <FlatList
          data={DATA}
          renderItem={({item})=> <ChatMessage message={item}/>}
