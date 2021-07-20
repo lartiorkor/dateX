@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {View,Text,StyleSheet, TextInput,Button} from 'react-native';
+import {View,Text,StyleSheet, TextInput,Button, TouchableOpacity} from 'react-native';
 import { styles } from 'styled-system';
 import {MaterialCommunityIcons,Fontisto,MaterialIcons} from 'react-native-vector-icons';
  
@@ -7,6 +7,10 @@ import {MaterialCommunityIcons,Fontisto,MaterialIcons} from 'react-native-vector
 
 export default function  InputBox  () {
     const [message,setMessage] = useState('');
+    const onPress =()=> {
+        console.warn("Sending : ${message}")
+        setMessage("");
+    }
     return (
        <View style={styles2.container} >
            <View style={styles2.main}> 
@@ -16,9 +20,12 @@ export default function  InputBox  () {
                   onChangeText={ setMessage}/>
                     
            </View>
-           {!!message && <View style={styles2.buttonContainer}>
+           {!!message && 
+           <TouchableOpacity onPress={onPress}>
+               <View style={styles2.buttonContainer} >
                <Button color="green" style={styles2.button} title="Send"/>
-           </View>}
+           </View>
+           </TouchableOpacity>}
             
              
        </View>
