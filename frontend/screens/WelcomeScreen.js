@@ -9,7 +9,8 @@ const WelcomeScreen = ({navigation}) => {
             colors={[lightTheme.primaryColor, lightTheme.colorAccent]}
             style={{flex: 1}} >
                 <StatusBar 
-                    backgroundColor={lightTheme.primaryColor}
+                    
+                    hidden={true}
                 />
             <View style={styles.container}>
                 <View style={styles.header}>

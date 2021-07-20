@@ -4,19 +4,33 @@ import { View,
         StyleSheet,
         TextInput,
         Image,
-        TouchableOpacity } from 'react-native'
+        TouchableOpacity, 
+        ImageBackground} from 'react-native'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import RNPickerSelect from 'react-native-picker-select'
 import { useState, createRef } from 'react'
 import BottomSheet from 'reanimated-bottom-sheet'
 import Animated from 'react-native-reanimated'
 import ImagePicker from 'react-native-image-crop-picker';
+import lightTheme from '../Theme/colors'
 
+const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
+'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
 
-const CreateProfile = () => {
+const CreateProfile = ({navigation}) => {
     const [opView, setopView] = useState(false)
     const [gender, setgender] = useState('')
+    const [profile, setprofile] = useState({
+        image: '',
+        username: '',
+        age: ''
+    })
+    const userProfile = {
+        ...profile,
+        gender: gender
+    }
 
+    const [image, setimage] = useState(avatars[Math.floor(Math.random() * 2)])
     const sheetRef = React.useRef(null)
     let fall = new Animated.Value(1)
 
@@ -37,6 +51,9 @@ const CreateProfile = () => {
             cropping: true,
           }).then(image => {
             console.log(image);
+            setimage(image.path)
+            closeBottomSheet()
+            setprofile({...profile, image: image.path})
         });  
     }
 
@@ -47,6 +64,9 @@ const CreateProfile = () => {
             cropping: true
           }).then(image => {
             console.log(image);
+            setimage(image.path)
+            closeBottomSheet()
+            setprofile({...profile, image: image.path})
         });         
     }
 
@@ -87,7 +107,7 @@ const CreateProfile = () => {
                 styles.container
             }>
                 <View style={{
-                    height: 130,
+                    height: 150,
                     flexDirection: 'row',
                     backgroundColor: '#fefefe'
                 }}>
@@ -98,22 +118,23 @@ const CreateProfile = () => {
                 }}>
                     <View style={{
                         alignItems: 'center',
-                        borderWidth: 1,
-                        borderRadius: 50,
+                        borderRadius: 15,
                         marginTop:10,
-                        padding: 10
                     }}>
                         <Image 
-                            source={require('../Assets/user.png')}
+                            source={{
+                                uri: image
+                            }}
                             style={{
-                                height: 60,
-                                width: 60,
+                                height: 100,
+                                width: 100,
+                                borderRadius: 15
                             }}
                         />
                     </View>
                     <TouchableOpacity 
                         style={{
-                        marginTop: 7
+                        marginTop: 10
                         }}
                         onPress={openBottomSheet}
                     >
@@ -128,21 +149,22 @@ const CreateProfile = () => {
                 }}>
                     <Text style={{
                         marginLeft: 10,
-                        marginTop: 30,
+                        marginTop: 50,
                         fontSize: 15,
                         color: 'grey'
-                    }}>Add an optional profile picture</Text>
+                    }}>Add your profile picture</Text>
                 </View>
                 </View>
-                <View style={{
-                }}>
+                <View>
                 <View style={{
                     backgroundColor: '#fefefe',
-                    paddingBottom: 10
+                    paddingBottom: 10,
                 }}>
                     <TextInput 
                         placeholder='username'
                         style={styles.txtInput}
+                        value={profile.username}
+                        onChangeText={(value) => setprofile({...profile, username: value})}
                     />
                 </View>
                 <Text style={{
@@ -150,19 +172,12 @@ const CreateProfile = () => {
                     letterSpacing: 2,
                     marginTop: 30
                 }}>
-                    NAME
-                </Text>
-                <TextInput 
-                    style={styles.txtInput}
-                />
-                <Text style={{
-                    paddingLeft: 20,
-                    letterSpacing: 2
-                }}>
                     AGE
                 </Text>
                 <TextInput 
                     style={styles.txtInput}
+                    value={profile.age}
+                    onChangeText={(value) => setprofile({...profile, age: value})}
                 />
                 </View>
                 <View style={{
@@ -213,6 +228,9 @@ const CreateProfile = () => {
                       }}
                     />
                 </View>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
+                    <Text style={styles.buttontxt}>DONE</Text>
+                </TouchableOpacity>
             </Animated.View>
             <BottomSheet 
             ref={sheetRef}
@@ -228,7 +246,7 @@ const CreateProfile = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#e3e3e3'
+        backgroundColor: '#ECEBF0'
     },
     txtInput: {
         borderBottomWidth: 1,
@@ -283,6 +301,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    button: {
+        borderRadius: 15,
+        backgroundColor: '#32F355',
+        marginHorizontal: 15,
+        paddingVertical: 10,
+        marginTop: 150
+    },
+    buttontxt: {
+        color: lightTheme.light,
+        fontSize: 22,
+        letterSpacing: 1.2,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    }
 })
 
 export default CreateProfile
