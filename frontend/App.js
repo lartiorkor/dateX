@@ -28,16 +28,6 @@ export class App extends Component {
           <Stack.Screen name='SignUp' component={SignUp} options={{
             headerShown: false
           }}/>
-<<<<<<< HEAD
-          <Stack.Screen name='Profile' component={CreateProfile}/>
-          <Stack.Screen name="chatroomscreen"
-            component={ChatRoomScreen}
-            options={ ({route })=> ({title:route.params.itemId})             
-           
-            }/>
-          <Stack.Screen name='chatscreen' component={ChatScreen}/>
-          <Stack.Screen name='Profile' component={CreateProfile}/>
-=======
           <Stack.Screen name='Profile' component={CreateProfile} options={{
             headerTitle: 'Create Profile',
             headerTitleAlign: 'center',
@@ -47,7 +37,6 @@ export class App extends Component {
             headerLeft: null,
             headerTitleAlign: 'center'
           }}/>
->>>>>>> 1a77aedea4e9b5102445cd0764ad9d7df37bbd2d
         </Stack.Navigator>
       </NavigationContainer>
     )

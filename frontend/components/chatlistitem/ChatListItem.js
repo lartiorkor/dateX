@@ -1,10 +1,9 @@
-import React from 'react';
+import React  from 'react';
 import {View,Text,Image,StyleSheet,TouchableWithoutFeedback} from 'react-native';
 import moment from 'moment';
 
 const ChatListItem = ({message,navigation,id}) => {
     let current_time = moment().format("HH:mm");
-    const route= useRoute();
     return (
         <TouchableWithoutFeedback  onPress={()=>navigation.navigate('chatroomscreen',{itemId:id})}>
        <View style={styles.container} >
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
     container: {
       flexDirection:'row',
       width:'95%',
-      justifyContent:'space-between',
+      justifyContent:'center',
       padding:10,
       paddingRight:20,
      

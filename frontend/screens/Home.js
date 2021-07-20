@@ -16,7 +16,7 @@ const Home = () => {
             <Tab.Navigator initialRouteName='Match' tabBarOptions={{
                 showLabel: false,
                 style: {
-                    position: 'absolute',
+                    position: 'relative',
                     borderTopRightRadius: 15,
                     borderTopLeftRadius: 15,
                     height: 60,
