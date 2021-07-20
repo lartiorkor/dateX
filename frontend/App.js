@@ -34,8 +34,7 @@ export class App extends Component {
           <Stack.Screen name='Profile' component={CreateProfile}/>
           <Stack.Screen name="chatroomscreen"
             component={ChatRoomScreen}
-            options={ ({route })=> ({title:route.params.itemId})
-               
+            options={ ({route })=> ({title:route.params.itemId})             
            
             }/>
           <Stack.Screen name='chatscreen' component={ChatScreen}/>

@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {View,Text,StyleSheet, TextInput,Button, TouchableOpacity} from 'react-native';
 import { styles } from 'styled-system';
-import {MaterialCommunityIcons,Fontisto,MaterialIcons} from 'react-native-vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
  
  
 
@@ -24,6 +24,7 @@ export default function  InputBox  () {
            <TouchableOpacity onPress={onPress}>
                <View style={styles2.buttonContainer} >
                <Button color="green" style={styles2.button} title="Send"/>
+                
            </View>
            </TouchableOpacity>}
             
