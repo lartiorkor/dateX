@@ -28,21 +28,31 @@ const SignUp = ({navigation}) => {
     }
 
     return (
-        <LinearGradient colors={[lightTheme.primaryColor, lightTheme.colorAccent]} style={styles.container}>
-            <View style={[styles.signupContainer, {flex: 1}]}>
+        <LinearGradient
+            colors={[lightTheme.primaryColor, lightTheme.colorAccent]} 
+            style={styles.container}>
+            <View style={{flex: 1}}>
+                <TouchableOpacity
+                    style={{marginLeft: -20, marginTop: -10}}
+                    onPress={() => navigation.goBack()}>
+                    <Feather 
+                        name='chevron-left'
+                        size={50}
+                    />
+                </TouchableOpacity>
                 <Text style={styles.signuptxt}>SignUp</Text>
             </View>
-            <View style={{flex: 3}}>
+            <View style={{flex: 3, paddingTop: 20}}>
                 <View style={styles.input}>
                     <FontAwesome 
                         name='user'
                         size={20}
-                        color={lightTheme.rn_iconscolor}
+                        color={lightTheme.light}
                         style={styles.userIcon}
                     />
                     <TextInput 
                         placeholder='Name'
-                        placeholderTextColor={lightTheme.textColor}
+                        placeholderTextColor={lightTheme.light}
                         autoCompleteType='off'
                         autoCorrect={false}
                         style={styles.txtInput}
@@ -54,16 +64,18 @@ const SignUp = ({navigation}) => {
                     <FontAwesome 
                         name='envelope'
                         size={20}
-                        color={lightTheme.rn_iconscolor}
+                        color={lightTheme.light}
                         style={styles.userIcon}
                     />
                     <TextInput 
                         placeholder='Email'
-                        placeholderTextColor={lightTheme.textColor}
+                        placeholderTextColor={lightTheme.light}
                         autoCompleteType='off'
                         autoCorrect={false}
                         keyboardType='email-address'
-                        style={styles.txtInput}
+                        style={[styles.txtInput, {
+                            
+                        }]}
                         value={signUpObj.email}
                         onChangeText={(text) => setsignUpObj({...signUpObj, email: text})}
                     />
@@ -72,14 +84,14 @@ const SignUp = ({navigation}) => {
                     <FontAwesome 
                         name='lock'
                         size={20}
-                        color={lightTheme.rn_iconscolor}
+                        color={lightTheme.light}
                         style={styles.userIcon}
                     />
                     <TextInput 
                         placeholder='Password'
-                        placeholderTextColor={lightTheme.textColor}
+                        placeholderTextColor={lightTheme.light}
                         secureTextEntry={showPassword}
-                        style={styles.txtInput}
+                        style={[styles.txtInput]}
                         value={signUpObj.password}
                         onChangeText={(text) => setsignUpObj({...signUpObj, password: text})}
                     />
@@ -99,12 +111,12 @@ const SignUp = ({navigation}) => {
                                     showPassword ? 
                                     <Feather 
                                         name='eye-off'
-                                        color={lightTheme.rn_iconscolor}
+                                        color={lightTheme.light}
                                         size={20}
                                     /> :
                                     <Feather 
                                         name='eye'
-                                        color={lightTheme.rn_iconscolor}
+                                        color={lightTheme.light}
                                         size={20}
                                     />
                                 }
@@ -116,12 +128,12 @@ const SignUp = ({navigation}) => {
                     <FontAwesome 
                         name='lock'
                         size={20}
-                        color={lightTheme.rn_iconscolor}
+                        color={lightTheme.light}
                         style={styles.userIcon}
                     />
                     <TextInput 
                         placeholder='Confirm Password'
-                        placeholderTextColor={lightTheme.textColor}
+                        placeholderTextColor={lightTheme.light}
                         secureTextEntry={showc_password}
                         style={styles.txtInput}
                         value={signUpObj.c_password}
@@ -145,12 +157,12 @@ const SignUp = ({navigation}) => {
                                     showc_password ? 
                                     <Feather 
                                         name='eye-off'
-                                        color={lightTheme.rn_iconscolor}
+                                        color={lightTheme.light}
                                         size={20}
                                     /> :
                                     <Feather 
                                         name='eye'
-                                        color={lightTheme.rn_iconscolor}
+                                        color={lightTheme.light}
                                         size={20}
                                     />
                                 }
@@ -182,12 +194,22 @@ const SignUp = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10
+        padding: 15,
+        backgroundColor: lightTheme.textColor
     },
     input: {
         borderWidth: 1,
         marginVertical: 10,
-        borderColor: '#d9d9d9',
+        borderColor: lightTheme.light,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        flexDirection: 'row',
+    },
+    editInput: {
+        borderWidth: 1,
+        marginVertical: 10,
+        borderColor: lightTheme.light,
         borderTopWidth: 0,
         borderLeftWidth: 0,
         borderRightWidth: 0,
@@ -197,28 +219,32 @@ const styles = StyleSheet.create({
         paddingTop: 12
     },
     txtInput: {
-        marginLeft: 10,
-        color: lightTheme.textColor,
+        marginLeft: 20,
+        color: lightTheme.black,
         fontSize: 16
     },
     signuptxt: {
-        fontSize: 40,
+        fontSize: 45,
         fontWeight: 'bold',
         color: lightTheme.textColor,
+        letterSpacing: 1.2,
+        marginTop: 50
     },
     signupContainer: {
-        justifyContent: 'center'
+        borderWidth: 1
     },
     btnContainer: {
         borderRadius: 30,
         padding: 12,
         marginTop: 30,
-        backgroundColor: lightTheme.rn_iconscolor
+        backgroundColor: lightTheme.black
     },
     btnText: {
         textAlign: 'center',
         fontSize: 24,
-        color: lightTheme.black
+        color: lightTheme.textColor,
+        letterSpacing: 1.2,
+        fontWeight: 'bold'
     },
     footer: {
         paddingTop: 70,
