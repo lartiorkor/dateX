@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import ChatScreen from './ChatScreen'
+import MessageScreen from './MessageScreen'
 import ProfileScreen from './ProfileScreen'
 import MatchScreen from './MatchScreen'
 
@@ -23,7 +23,7 @@ const Home = () => {
                     backgroundColor: '#ffffff',
                 }
             }}>
-                <Tab.Screen name='Chat' component={ChatScreen}
+                <Tab.Screen name='Chat' component={MessageScreen}
                 options={{
                     tabBarIcon: ({focused}) => (
                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
