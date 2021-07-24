@@ -5,14 +5,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import MessageScreen from './MessageScreen'
-import ProfileScreen from './ProfileScreen'
+import SettingsStackScreen from './SettingsStackScreen'
 import MatchScreen from './MatchScreen'
 
 const Tab = createBottomTabNavigator();
 
 const Home = () => {
     return (
-        <NavigationContainer independent={true}>
             <Tab.Navigator initialRouteName='Match' tabBarOptions={{
                 showLabel: false,
                 style: {
@@ -52,12 +51,12 @@ const Home = () => {
                         )
                     }}
                 />
-                <Tab.Screen name='Profile' component={ProfileScreen}
+                <Tab.Screen name='SettingsStack' component={SettingsStackScreen}
                     options={{
                         tabBarIcon: ({focused}) => (
                             <View style={{alignItems: 'center', justifyContent: 'center'}}>
                                 <Ionicons 
-                                    name='person-outline'
+                                    name='settings-outline'
                                     size={30}
                                     color= {focused ? '#e32f45' : '#748c94'}
                                 />
@@ -66,7 +65,6 @@ const Home = () => {
                     }}
                 />
             </Tab.Navigator>
-        </NavigationContainer>
     )
 }
 

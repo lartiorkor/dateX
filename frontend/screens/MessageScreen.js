@@ -9,14 +9,12 @@ const chatStack = createStackNavigator();
 
 const MessageScreen = () => {
     return (
-        <NavigationContainer independent={true}>
             <chatStack.Navigator>
-                <chatStack.Screen name='chatscreen' component={ChatScreen}/>
-                <chatStack.Screen name='chatroomscreen'
-            component={ChatRoomScreen}
-            />
+                <chatStack.Screen name='chatscreen' component={ChatScreen} options={{
+                    headerShown: false
+                }}/>
+                <chatStack.Screen name='chatroomscreen' component={ChatRoomScreen}/>
             </chatStack.Navigator>
-        </NavigationContainer>
     )
 }
 

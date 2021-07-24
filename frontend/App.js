@@ -34,8 +34,7 @@ export class App extends Component {
             headerLeft: null
           }}/>
           <Stack.Screen name='Home' component={Home} options={{
-            headerLeft: null,
-            headerTitleAlign: 'center'
+            headerShown: false
           }}/>
         </Stack.Navigator>
       </NavigationContainer>
