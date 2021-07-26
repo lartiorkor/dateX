@@ -13,7 +13,8 @@ const MessageScreen = () => {
                 <chatStack.Screen name='chatscreen' component={ChatScreen} options={{
                     headerShown: false
                 }}/>
-                <chatStack.Screen name='chatroomscreen' component={ChatRoomScreen}/>
+                <chatStack.Screen name='chatroomscreen' component={ChatRoomScreen}
+                options={ ()=> ({title:this.route.params.itemId})}/>
             </chatStack.Navigator>
     )
 }
