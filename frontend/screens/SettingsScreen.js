@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity } from 'react-native'
+import React, {useState} from 'react'
+import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity, Switch } from 'react-native'
 import lightTheme from '../Theme/colors'
 
 
@@ -7,7 +7,12 @@ const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-
 'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
 
 
+
 const SettingsScreen = ({navigation}) => {
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState)
+    const [notifEnabled, setNotifEnabled] = useState(false);
+    const notifToggle = () => setNotifEnabled(previousState => !previousState)
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -39,6 +44,60 @@ const SettingsScreen = ({navigation}) => {
                 </View>
             </View>
             <View style={styles.body}>
+                <View style={[styles.signoutbtn, {flexDirection: 'row', justifyContent: 'space-between'}]}>
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 16,
+                        letterSpacing: 1.2,
+                        fontWeight: 'bold'
+                    }}>Dark Theme</Text>
+                    <Switch
+                        trackColor={{ false: "#767577", true: "#f4f3f4" }}
+                        thumbColor={isEnabled ? "#25DB1F" : "#f4f3f4"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                    />
+                </View>
+                <View style={[styles.signoutbtn, {flexDirection: 'row', justifyContent: 'space-between'}]}>
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 16,
+                        letterSpacing: 1.2,
+                        fontWeight: 'bold'
+                    }}>Notifications</Text>
+                    <Switch
+                        trackColor={{ false: "#767577", true: "#f4f3f4" }}
+                        thumbColor={notifEnabled ? "#25DB1F" : "#f4f3f4"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={notifToggle}
+                        value={notifEnabled}
+                    />
+                </View>
+                <TouchableOpacity style={styles.signoutbtn}>
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 16,
+                        letterSpacing: 1.2,
+                        fontWeight: 'bold'
+                    }}>Language</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.signoutbtn}>
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 16,
+                        letterSpacing: 1.2,
+                        fontWeight: 'bold'
+                    }}>Privacy Policy</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.signoutbtn}>
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 16,
+                        letterSpacing: 1.2,
+                        fontWeight: 'bold'
+                    }}>FAQs</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.signoutbtn}>
                     <Text style={{
                         color: 'red',
