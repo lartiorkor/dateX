@@ -7,7 +7,12 @@ const morgan = require('morgan');
 const bodyparser = require('body-parser');
 
 const conversationsRoute = require("./router/conversation");
+const authroute = require('./router/auth');
+
+
+
 const messagesRoute = require("./router/messages");
+
 
 // initializing server
 const app = express();
@@ -22,6 +27,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+
+app.use("/api/conversations", conversationsRoute);
+app.use("/api/auth",authroute)
 
 
 // MySql SetUp
