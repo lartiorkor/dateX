@@ -14,7 +14,7 @@ const MessageScreen = () => {
                     headerShown: false
                 }}/>
                 <chatStack.Screen name='chatroomscreen' component={ChatRoomScreen}
-                options={ ()=> ({title:this.route.params.itemId})}/>
+                />
             </chatStack.Navigator>
     )
 }

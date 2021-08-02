@@ -5,7 +5,7 @@ import moment from 'moment';
 const ChatListItem = ({message,navigation,id}) => {
     let current_time = moment().format("HH:mm");
     return (
-        <TouchableWithoutFeedback  onPress={()=>navigation.navigate('chatroomscreen',{itemId:id})}>
+        <TouchableWithoutFeedback  onPress={()=>navigation.navigate('chatroomscreen')}>
        <View style={styles.container} >
             <View style={styles.leftContainer}>
                 <Image style={styles.image} source={require ('../../Assets/1.jpg')}/>

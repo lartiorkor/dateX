@@ -23,13 +23,14 @@ const DATA = [
     },];
 
 const ChatRoomScreen = ({navigation,route}) => {
+  const {identifier} = this.props.route.params 
    
         
     return (
         <ImageBackground style={{width:'100%', height:'100%'}} source={require('../../Assets/BG.png')}>
          <FlatList
          data={DATA}
-         renderItem={({item})=> <ChatMessage message={item}/>}
+         renderItem={({item})=> <ChatMessage message={item} />}
          inverted />
          <InputBox/>
          </ImageBackground>

@@ -55,7 +55,7 @@ const DATA = [
 ];
  
  
-const Messages = () => {
+const Messages = ({navigation}) => {
     return (
       <View style={styles.main}>
       <Text style={{fontWeight:'bold',fontSize:16,textAlign:'left'}}>Messages</Text>
@@ -63,8 +63,8 @@ const Messages = () => {
            
             <FlatList 
             data={DATA}
-            renderItem={() =>     
-              <ChatListItem message='react-native ye gae' navigation={navigation} id={item.id}/>}
+            renderItem={({item}) =>     
+              <ChatListItem message={item.title} navigation={navigation} />}
               keyExtractor={item => item.id}
               showsVerticalScrollIndicator={false}/>
         
