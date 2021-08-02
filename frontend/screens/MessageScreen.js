@@ -9,7 +9,16 @@ const chatStack = createStackNavigator();
 
 const MessageScreen = () => {
     return (
-            <chatStack.Navigator>
+            <chatStack.Navigator screenOptions={{
+                headerStyle:{
+                    backgroundColor:'green',
+                    shadowOpacity:0,
+                    elevation:0,
+                },
+                headerTintColor:'white',
+                headerTitleAlign:'left',
+                headerTitleStyle:{ fontWeight:'bold',}
+            }}>
                 <chatStack.Screen name='chatscreen' component={ChatScreen} options={{
                     headerShown: false
                 }}/>

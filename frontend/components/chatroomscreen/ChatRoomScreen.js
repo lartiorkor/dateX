@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text,View,TouchableOpacity, TouchableWithoutFeedback, FlatList,ImageBackground} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+ 
 import ChatMessage from '../chatmessage/ChatMessage';
 import InputBox from '../inputbox/InputBox';
 
@@ -23,8 +23,8 @@ const DATA = [
     },];
 
 const ChatRoomScreen = ({route}) => {
-  const route=useRoute()
-  console.log(route.params)
+   
+  console.log(route.params.id)
    
    
         
