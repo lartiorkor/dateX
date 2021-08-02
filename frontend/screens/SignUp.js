@@ -221,7 +221,8 @@ const styles = StyleSheet.create({
     txtInput: {
         marginLeft: 20,
         color: lightTheme.black,
-        fontSize: 16
+        fontSize: 16,
+        flex: 1
     },
     signuptxt: {
         fontSize: 45,

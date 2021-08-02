@@ -22,10 +22,8 @@ const DATA = [
       createdAt:'2021-07-19T08:20:00.000Z'
     },];
 
-const ChatRoomScreen = ({route}) => {
-   
+const ChatRoomScreen = ({route}) => { 
   console.log(route.params.id)
-   
    
         
     return (

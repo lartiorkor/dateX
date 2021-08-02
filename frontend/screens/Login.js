@@ -126,11 +126,11 @@ const Login = ({navigation}) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={[styles.btnContainer, {marginTop: 20}]}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                    <View style={[styles.btnContainer, {marginTop: 20}]}>
                         <Text style={styles.btnText}>LOGIN</Text>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
             </View>
         </ImageBackground>
     )
@@ -165,7 +165,8 @@ const styles = StyleSheet.create({
     txtinput: {
         marginLeft: 15,
         color: lightTheme.black,
-        fontSize: 16
+        fontSize: 16,
+        flex: 1
     },
     btnContainer: {
         borderRadius: 30,

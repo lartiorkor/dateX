@@ -1,22 +1,28 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity, Switch } from 'react-native'
 import lightTheme from '../Theme/colors'
+import darkTheme from '../Theme/dark'
+import ThemeContext from '../components/context/ThemeContext'
+import { backgroundColor } from 'styled-system'
+import { color } from 'react-native-reanimated'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
 'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
 
-
-
 const SettingsScreen = ({navigation}) => {
+    const [theme, settheme] = useState(lightTheme);
     const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState)
     const [notifEnabled, setNotifEnabled] = useState(false);
     const notifToggle = () => setNotifEnabled(previousState => !previousState)
+
+    const {currentTheme, toggleTheme} = React.useContext(ThemeContext)
+
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headertxt}>Settings</Text>
+        <View style={[styles.container, {backgroundColor: currentTheme.backgroundColor}]}>
+            <View style={[styles.header, {backgroundColor: currentTheme.button }]}>
+                <Text style={[styles.headertxt, {color: currentTheme.txtColor}]}>Settings</Text>
                 <View style={styles.headerpanel}>
                     <Image 
                         source={{
@@ -32,21 +38,25 @@ const SettingsScreen = ({navigation}) => {
                         <Text style={{
                             fontSize: 18,
                             marginTop: 10,
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            color: currentTheme.txtColor
                         }}>User Username</Text>
                     </View>
-                    <Pressable style={styles.editiconcontainer} onPress={() => navigation.navigate('EditProfile')}>
-                        <Image 
-                            source={require('../Assets/editprofileicon.png')}
-                            style={styles.editicon}
+                    <Pressable style={[styles.editiconcontainer, {
+                        borderColor: currentTheme.txtColor
+                    }]} onPress={() => navigation.navigate('EditProfile')}>
+                        <Icon
+                            name= 'account-edit'
+                            size={30}
+                            color={currentTheme.txtColor}
                         />
                     </Pressable>
                 </View>
             </View>
             <View style={styles.body}>
-                <View style={[styles.signoutbtn, {flexDirection: 'row', justifyContent: 'space-between'}]}>
+                <View style={[styles.button, {flexDirection: 'row', justifyContent: 'space-between', backgroundColor: currentTheme.button}]}>
                     <Text style={{
-                        color: 'black',
+                        color: currentTheme.txtColor,
                         fontSize: 16,
                         letterSpacing: 1.2,
                         fontWeight: 'bold'
@@ -55,13 +65,13 @@ const SettingsScreen = ({navigation}) => {
                         trackColor={{ false: "#767577", true: "#f4f3f4" }}
                         thumbColor={isEnabled ? "#25DB1F" : "#f4f3f4"}
                         ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleSwitch}
+                        onValueChange={() => toggleTheme()}
                         value={isEnabled}
                     />
                 </View>
-                <View style={[styles.signoutbtn, {flexDirection: 'row', justifyContent: 'space-between'}]}>
+                <View style={[styles.button, {flexDirection: 'row', justifyContent: 'space-between', backgroundColor: currentTheme.button}]}>
                     <Text style={{
-                        color: 'black',
+                        color: currentTheme.txtColor,
                         fontSize: 16,
                         letterSpacing: 1.2,
                         fontWeight: 'bold'
@@ -74,31 +84,31 @@ const SettingsScreen = ({navigation}) => {
                         value={notifEnabled}
                     />
                 </View>
-                <TouchableOpacity style={styles.signoutbtn}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: currentTheme.button}]}>
                     <Text style={{
-                        color: 'black',
+                        color: currentTheme.txtColor,
                         fontSize: 16,
                         letterSpacing: 1.2,
                         fontWeight: 'bold'
                     }}>Language</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.signoutbtn}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: currentTheme.button}]}>
                     <Text style={{
-                        color: 'black',
+                        color: currentTheme.txtColor,
                         fontSize: 16,
                         letterSpacing: 1.2,
                         fontWeight: 'bold'
                     }}>Privacy Policy</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.signoutbtn}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: currentTheme.button}]}>
                     <Text style={{
-                        color: 'black',
+                        color: currentTheme.txtColor,
                         fontSize: 16,
                         letterSpacing: 1.2,
                         fontWeight: 'bold'
                     }}>FAQs</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.signoutbtn}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: currentTheme.button}]}>
                     <Text style={{
                         color: 'red',
                         fontSize: 16,
@@ -108,7 +118,7 @@ const SettingsScreen = ({navigation}) => {
                 </TouchableOpacity>
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -148,14 +158,15 @@ const styles = StyleSheet.create({
     editiconcontainer: {
         position: 'absolute',
         right: 15,
-        top: 15
+        top: 15,
+        borderRadius: 30,
+        borderWidth: 2
     },
     editicon: {
         height: 40,
         width: 40
     },
-    signoutbtn: {
-        backgroundColor: lightTheme.light,
+    button: {
         paddingHorizontal: 15,
         paddingVertical: 12
     },
