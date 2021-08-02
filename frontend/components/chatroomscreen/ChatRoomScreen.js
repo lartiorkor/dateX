@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text,View,TouchableOpacity, TouchableWithoutFeedback, FlatList,ImageBackground} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+ 
 import ChatMessage from '../chatmessage/ChatMessage';
 import InputBox from '../inputbox/InputBox';
 

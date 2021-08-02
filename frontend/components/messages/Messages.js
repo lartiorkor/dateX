@@ -64,7 +64,7 @@ const Messages = ({navigation}) => {
             <FlatList 
             data={DATA}
             renderItem={({item}) =>     
-              <ChatListItem message={item.title} navigation={navigation} identifier={item.id} />}
+              <ChatListItem message={item.title} navigation={navigation} identifier={item.id}/>}
               keyExtractor={item => item.id}
               showsVerticalScrollIndicator={false}/>
         
