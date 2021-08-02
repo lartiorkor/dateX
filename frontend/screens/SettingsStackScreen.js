@@ -14,11 +14,7 @@ const SettingsStackScreen = () => {
                 headerShown: false,
             }}/>
             <settingsStack.Screen name='EditProfile' component={EditProfile} options={{
-                headerTitleAlign: 'center',
-                title: 'Edit Profile',
-                headerTitleStyle: {
-                    letterSpacing: 1.2
-                }
+                headerShown: false
             }}/>
         </settingsStack.Navigator>
     )

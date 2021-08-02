@@ -2,10 +2,10 @@ import React  from 'react';
 import {View,Text,Image,StyleSheet,TouchableWithoutFeedback} from 'react-native';
 import moment from 'moment';
 
-const ChatListItem = ({message,navigation,id}) => {
+const ChatListItem = ({message,navigation,identifier}) => {
     let current_time = moment().format("HH:mm");
     return (
-        <TouchableWithoutFeedback  onPress={()=>navigation.navigate('chatroomscreen')}>
+        <TouchableWithoutFeedback  onPress={()=>navigation.navigate('chatroomscreen',{id:identifier})}>
        <View style={styles.container} >
             <View style={styles.leftContainer}>
                 <Image style={styles.image} source={require ('../../Assets/1.jpg')}/>
