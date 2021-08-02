@@ -6,18 +6,24 @@ import ThemeContext from '../components/context/ThemeContext'
 import { backgroundColor } from 'styled-system'
 import { color } from 'react-native-reanimated'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import UserDataContext from '../components/context/UserDataContext'
+import UserProfileContext from '../components/context/UserProfileContext'
 
 
 const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
 'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
 
 const SettingsScreen = ({navigation}) => {
+    const {userdata, setuserdata} = React.useContext(UserDataContext)
+    const {userprofile, setuserprofile} = React.useContext(UserProfileContext)
     const [theme, settheme] = useState(lightTheme);
     const [isEnabled, setIsEnabled] = useState(false);
     const [notifEnabled, setNotifEnabled] = useState(false);
     const notifToggle = () => setNotifEnabled(previousState => !previousState)
 
     const {currentTheme, toggleTheme} = React.useContext(ThemeContext)
+    const {name} = userdata
+    const {profilepic, username} = userprofile
 
     return (
         <View style={[styles.container, {backgroundColor: currentTheme.backgroundColor}]}>
@@ -26,7 +32,7 @@ const SettingsScreen = ({navigation}) => {
                 <View style={styles.headerpanel}>
                     <Image 
                         source={{
-                            uri: avatars[Math.floor(Math.random() * 2)]
+                            uri: profilepic
                         }}
                         style={styles.headerpanelimg}
                     />
@@ -40,7 +46,7 @@ const SettingsScreen = ({navigation}) => {
                             marginTop: 10,
                             fontWeight: 'bold',
                             color: currentTheme.txtColor
-                        }}>User Username</Text>
+                        }}>{username}</Text>
                     </View>
                     <Pressable style={[styles.editiconcontainer, {
                         borderColor: currentTheme.txtColor
@@ -150,7 +156,7 @@ const styles = StyleSheet.create({
     headerpanelimg: {
         height: 70,
         width: 70,
-        borderRadius: 30
+        borderRadius: 35
     },
     headerpaneltxtbox: {
         marginLeft: 20

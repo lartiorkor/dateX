@@ -13,24 +13,27 @@ import BottomSheet from 'reanimated-bottom-sheet'
 import Animated from 'react-native-reanimated'
 import ImagePicker from 'react-native-image-crop-picker';
 import lightTheme from '../Theme/colors'
+import UserProfileContext from '../components/context/UserProfileContext'
 
 const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
 'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
 
 const CreateProfile = ({navigation}) => {
-    const [opView, setopView] = useState(false)
-    const [gender, setgender] = useState('')
-    const [profile, setprofile] = useState({
-        image: '',
-        username: '',
-        age: ''
-    })
-    const userProfile = {
-        ...profile,
-        gender: gender
-    }
-
     const [image, setimage] = useState(avatars[Math.floor(Math.random() * 2)])
+    const {userprofile, setuserprofile} = React.useContext(UserProfileContext)
+    const [opView, setopView] = useState(false)
+    // const [gender, setgender] = useState('')
+    const {gender, username, age, profilepic} = userprofile
+    // const [profile, setprofile] = useState({
+    //     image: '',
+    //     username: '',
+    //     age: ''
+    // })
+    // const userProfile = {
+    //     ...profile,
+    //     gender: gender
+    // }
+
     const sheetRef = React.useRef(null)
     let fall = new Animated.Value(1)
 
@@ -53,7 +56,7 @@ const CreateProfile = ({navigation}) => {
             console.log(image);
             setimage(image.path)
             closeBottomSheet()
-            setprofile({...profile, image: image.path})
+            setuserprofile({...userprofile, profilepic: image.path})
         });  
     }
 
@@ -66,7 +69,7 @@ const CreateProfile = ({navigation}) => {
             console.log(image);
             setimage(image.path)
             closeBottomSheet()
-            setprofile({...profile, image: image.path})
+            setuserprofile({...userprofile, profilepic: image.path})
         });         
     }
 
@@ -163,8 +166,8 @@ const CreateProfile = ({navigation}) => {
                     <TextInput 
                         placeholder='username'
                         style={styles.txtInput}
-                        value={profile.username}
-                        onChangeText={(value) => setprofile({...profile, username: value})}
+                        value={username}
+                        onChangeText={(value) => setuserprofile({...userprofile, username: value})}
                     />
                 </View>
                 <Text style={{
@@ -176,8 +179,8 @@ const CreateProfile = ({navigation}) => {
                 </Text>
                 <TextInput 
                     style={styles.txtInput}
-                    value={profile.age}
-                    onChangeText={(value) => setprofile({...profile, age: value})}
+                    value={age}
+                    onChangeText={(value) => setuserprofile({...userprofile, age: value})}
                 />
                 </View>
                 <View style={{
@@ -195,7 +198,7 @@ const CreateProfile = ({navigation}) => {
                         value: null,
                         color: '#9ea0a4'
                     }} 
-                    onValueChange={(value) => {setgender(value)}}
+                    onValueChange={(value) => {setuserprofile({...userprofile, gender: value})}}
                     useNativeAndroidPickerStyle={false}
                     items={[
                         {label: 'Male', value: 'male'},

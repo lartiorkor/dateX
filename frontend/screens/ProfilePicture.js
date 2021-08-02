@@ -2,8 +2,11 @@ import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ThemeContext from '../components/context/ThemeContext'
+import UserProfileContext from '../components/context/UserProfileContext'
 
-const ProfilePicture = ({navigation, route}) => {
+const ProfilePicture = ({navigation}) => {
+    const {userprofile} = React.useContext(UserProfileContext)
+    const {profilepic} = userprofile
     const {currentTheme} = React.useContext(ThemeContext)
     return (
         <View style={[styles.container, {
@@ -20,7 +23,7 @@ const ProfilePicture = ({navigation, route}) => {
             <View style={styles.body}>
                 <Image 
                     source={{
-                        uri: route.params.picture
+                        uri: profilepic
                     }}
                     style={{
                         flex: 1

@@ -5,27 +5,33 @@ import  FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useState } from 'react'
 import Feather from 'react-native-vector-icons/Feather'
 import lightTheme from '../Theme/colors'
+import UserDataContext from '../components/context/UserDataContext'
 
 const {height, width} = Dimensions.get('screen')
 
 
 const SignUp = ({navigation}) => {
-
-    const [signUpObj, setsignUpObj] = useState({
-        name: '',
-        email: '',
-        password: '',
-        c_password: ''
-    })
+    const {userdata, setuserdata} = React.useContext(UserDataContext)
+    const {name, email, password, confirmpassword} = userdata
+    // const [signUpObj, setsignUpObj] = useState({
+    //     name: '',
+    //     email: '',
+    //     password: '',
+    //     c_password: ''
+    // })
 
     const [showPassword, setshowPassword] = useState(false)
     const [showc_password, setshowc_password] = useState(false)
-    let { password, c_password } = signUpObj
+    // let { password, c_password } = signUpObj
 
     const showDeets = () => {
-        alert(`Name: ${signUpObj.name}, Email: ${signUpObj.email}, 
-        Password: ${signUpObj.password} , Confirm Password: ${signUpObj.c_password}`)
+        console.log(`Name: ${name}, Email: ${email}, 
+        Password: ${password} , Confirm Password: ${confirmpassword}`)
     }
+
+    const signUpEvent = () => {
+        navigation.navigate('Profile')
+    } 
 
     return (
         <LinearGradient
@@ -56,8 +62,8 @@ const SignUp = ({navigation}) => {
                         autoCompleteType='off'
                         autoCorrect={false}
                         style={styles.txtInput}
-                        value={signUpObj.name}
-                        onChangeText={(text) => setsignUpObj({...signUpObj, name: text})}
+                        value={name}
+                        onChangeText={(text) => setuserdata({...userdata, name: text})}
                     />
                 </View>
                 <View style={styles.input}>
@@ -76,8 +82,8 @@ const SignUp = ({navigation}) => {
                         style={[styles.txtInput, {
                             
                         }]}
-                        value={signUpObj.email}
-                        onChangeText={(text) => setsignUpObj({...signUpObj, email: text})}
+                        value={email}
+                        onChangeText={(text) => setuserdata({...userdata, email: text})}
                     />
                 </View>
                 <View style={styles.input}>
@@ -92,8 +98,8 @@ const SignUp = ({navigation}) => {
                         placeholderTextColor={lightTheme.light}
                         secureTextEntry={showPassword}
                         style={[styles.txtInput]}
-                        value={signUpObj.password}
-                        onChangeText={(text) => setsignUpObj({...signUpObj, password: text})}
+                        value={password}
+                        onChangeText={(text) => setuserdata({...userdata, password: text})}
                     />
                     <View style={{
                         position: 'absolute',
@@ -110,12 +116,12 @@ const SignUp = ({navigation}) => {
                                 {
                                     showPassword ? 
                                     <Feather 
-                                        name='eye-off'
+                                        name='eye'
                                         color={lightTheme.light}
                                         size={20}
                                     /> :
                                     <Feather 
-                                        name='eye'
+                                        name='eye-off'
                                         color={lightTheme.light}
                                         size={20}
                                     />
@@ -136,8 +142,8 @@ const SignUp = ({navigation}) => {
                         placeholderTextColor={lightTheme.light}
                         secureTextEntry={showc_password}
                         style={styles.txtInput}
-                        value={signUpObj.c_password}
-                        onChangeText={(text) => setsignUpObj({...signUpObj, c_password: text})}
+                        value={confirmpassword}
+                        onChangeText={(text) => setuserdata({...userdata, confirmpassword: text})}
                     />
                     <View style={{
                         position: 'absolute',
@@ -146,7 +152,7 @@ const SignUp = ({navigation}) => {
                         marginRight: 10
                     }}>
                     {
-                        c_password !== '' ?
+                        confirmpassword !== '' ?
                         <TouchableOpacity
                             style={{
                                 justifyContent: 'center',
@@ -156,12 +162,12 @@ const SignUp = ({navigation}) => {
                             {
                                     showc_password ? 
                                     <Feather 
-                                        name='eye-off'
+                                        name='eye'
                                         color={lightTheme.light}
                                         size={20}
                                     /> :
                                     <Feather 
-                                        name='eye'
+                                        name='eye-off'
                                         color={lightTheme.light}
                                         size={20}
                                     />
@@ -170,7 +176,7 @@ const SignUp = ({navigation}) => {
                     }
                     </View>
                 </View>
-                <TouchableOpacity onPress= {() => {navigation.navigate('Profile')}}>
+                <TouchableOpacity onPress= {() => signUpEvent()}>
                     <View style={styles.btnContainer}>
                         <Text style={styles.btnText}>SIGNUP</Text>
                     </View>
@@ -220,7 +226,8 @@ const styles = StyleSheet.create({
     },
     txtInput: {
         marginLeft: 20,
-        color: lightTheme.black,
+        color: 'white',
+        fontWeight: 'bold',
         fontSize: 16,
         flex: 1
     },

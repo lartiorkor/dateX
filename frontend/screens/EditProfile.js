@@ -6,6 +6,8 @@ import ImagePicker from 'react-native-image-crop-picker'
 import BottomSheet from 'reanimated-bottom-sheet'
 import { createStackNavigator } from '@react-navigation/stack'
 import ThemeContext from '../components/context/ThemeContext'
+import UserDataContext from '../components/context/UserDataContext'
+import UserProfileContext from '../components/context/UserProfileContext'
 
 import ProfilePicture from './ProfilePicture'
 
@@ -28,6 +30,10 @@ const EditProfile = () => {
 }
 
 const EditProfileScreen = ({navigation}) => {  
+    const {userprofile, setuserprofile} = React.useContext(UserProfileContext)
+    const {userdata, setuserdata} = React.useContext(UserDataContext)
+    const {username, profilepic} = userprofile
+    const {email} = userdata
     const {currentTheme} = React.useContext(ThemeContext) 
     const [opView, setopView] = useState(false)
     const [image, setimage] = useState(avatars[Math.floor(Math.random() * 2)])
@@ -51,7 +57,7 @@ const EditProfileScreen = ({navigation}) => {
             cropping: true,
           }).then(image => {
             console.log(image);
-            setimage(image.path)
+            setuserprofile({...userprofile, profilepic: image.path})
             closeBottomSheet()
         });  
     }
@@ -63,7 +69,7 @@ const EditProfileScreen = ({navigation}) => {
             cropping: true
           }).then(image => {
             console.log(image);
-            setimage(image.path)
+            setuserprofile({...userprofile, profilepic: image.path})
             closeBottomSheet()
         });         
     }
@@ -118,7 +124,7 @@ const EditProfileScreen = ({navigation}) => {
                     <TouchableOpacity onPress={() => navigation.navigate('Profile Photo', {picture: image})}>
                         <Image 
                             source={{
-                                uri: image
+                                uri: profilepic
                             }}
                             style= {{
                                 height: 150,
@@ -151,19 +157,22 @@ const EditProfileScreen = ({navigation}) => {
             <View style={styles.body}>
                 <Text style={styles.textstyle}>Username</Text>
                 <TextInput
-                    style= {styles.textinput}
+                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
+                    value= {username}
+                    onChangeText={(value) => setuserprofile({...userprofile, username: value})}
                 />
                 <Text style={styles.textstyle}>Email</Text>
                 <TextInput
-                    style= {styles.textinput}
+                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
+                    value={email}
                 />
                 <Text style={styles.textstyle}>Phone</Text>
                 <TextInput
-                    style= {styles.textinput}
+                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
                 />
                 <Text style={styles.textstyle}>About</Text>
                 <TextInput
-                    style= {styles.textinput}
+                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
                 />
             </View>
             <BottomSheet 
@@ -211,7 +220,6 @@ const styles = StyleSheet.create({
       borderBottomColor: 'grey',
       marginBottom: 15,
       fontSize: 20,
-      fontWeight: 'bold'
     },
     textstyle: {
         fontSize: 16,

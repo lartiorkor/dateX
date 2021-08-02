@@ -28,8 +28,6 @@ const Home = () => {
                 showLabel: false,
                 style: {
                     position: 'relative',
-                    borderTopRightRadius: 15,
-                    borderTopLeftRadius: 15,
                     height: 60,
                     backgroundColor: currentTheme.tabColor,
                 }
