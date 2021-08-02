@@ -22,8 +22,8 @@ const DATA = [
       createdAt:'2021-07-19T08:20:00.000Z'
     },];
 
-const ChatRoomScreen = ({navigation,route}) => {
-  const {identifier} = this.props.route.params 
+const ChatRoomScreen = ({route}) => { 
+  console.log(route.params.id)
    
         
     return (
