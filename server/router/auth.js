@@ -54,9 +54,9 @@ router.post('/signup', async (req, res) => {
             err: err
         });
     });
+});
 
 
-})
 
 router.post('/login', async (req, res) => {
     const body = req.body;
