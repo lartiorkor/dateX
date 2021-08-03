@@ -1,5 +1,5 @@
 const geolocation = require ('google-geolocation') ({
-    key: 'AIzaSyA1NqKsyDkU2DAh2JR-0sDazvcqbY9qInM'
+    key: 'API_key here'
   });
    
   // Configure API parameters
