@@ -76,29 +76,43 @@ const EditProfileScreen = ({navigation}) => {
 
     const renderContent = () => (
         <View style={{
-          backgroundColor: 'white',
+          backgroundColor: currentTheme.backgroundColor,
           padding: 16,
           justifyContent: 'center'
         }}> 
           <View style={{alignItems: 'center'}}>
-            <Text style={styles.panelTitle}>
+            <Text style={[styles.panelTitle, {
+                color: currentTheme.txtColor
+            }]}>
               Upload Photo
             </Text>
-            <Text style={styles.panelSubtitle}>
+            <Text style={[styles.panelSubtitle, {
+                color: currentTheme.txtColor
+            }]}>
               Choose your profile picture
             </Text>
           </View>
-          <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
-            <Text style={styles.panelButtonTitle}>TAKE PHOTO</Text>
+          <TouchableOpacity style={[styles.panelButton, {
+              backgroundColor: currentTheme.button
+          }]} onPress={takePhotoFromCamera}>
+            <Text style={[styles.panelButtonTitle, {color: currentTheme.txtColor}]}>TAKE PHOTO</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
-            <Text style={styles.panelButtonTitle}>CHOOSE PHOTO</Text>
+          <TouchableOpacity style={[styles.panelButton, {
+              backgroundColor: currentTheme.button
+          }]} onPress={choosePhotoFromLibrary}>
+            <Text style={[styles.panelButtonTitle, {
+                color: currentTheme.txtColor
+            }]}>CHOOSE PHOTO</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            style={styles.panelButton}
+            style={[styles.panelButton, {
+                backgroundColor: currentTheme.button
+            }]}
             onPress={closeBottomSheet}
             >
-            <Text style={styles.panelButtonTitle}>CANCEL</Text>
+            <Text style={[styles.panelButtonTitle, {
+                color: currentTheme.txtColor
+            }]}>CANCEL</Text>
           </TouchableOpacity>
         </View>
       );
@@ -107,7 +121,8 @@ const EditProfileScreen = ({navigation}) => {
             backgroundColor: currentTheme.backgroundColor
         }]}>
             <View style={[styles.header, {
-                backgroundColor: currentTheme.backgroundColor
+                backgroundColor: currentTheme.backgroundColor,
+                borderColor: currentTheme.headerbc
             }]}>
                 <Ionicons 
                     name='arrow-back-outline'
@@ -155,25 +170,47 @@ const EditProfileScreen = ({navigation}) => {
                 </View>
             </View>
             <View style={styles.body}>
-                <Text style={styles.textstyle}>Username</Text>
-                <TextInput
-                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
-                    value= {username}
-                    onChangeText={(value) => setuserprofile({...userprofile, username: value})}
-                />
-                <Text style={styles.textstyle}>Email</Text>
-                <TextInput
-                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
-                    value={email}
-                />
-                <Text style={styles.textstyle}>Phone</Text>
-                <TextInput
-                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
-                />
-                <Text style={styles.textstyle}>About</Text>
-                <TextInput
-                    style= {[styles.textinput, {color: currentTheme.txtColor}]}
-                />
+                <View style = {[styles.actionbox, {
+                    borderBottomColor: currentTheme.tabActive
+                }]}>
+                    <Text style={styles.textstyle}>Username</Text>
+                    <TextInput
+                        style= {[styles.textinput, {color: currentTheme.txtColor}]}
+                        autoCorrect={false}
+                        value= {username}
+                        autoCompleteType='username'
+                        onChangeText={(value) => setuserprofile({...userprofile, username: value})}
+                    />
+                </View>
+                <View style = {[styles.actionbox, {
+                    borderBottomColor: currentTheme.tabActive
+                }]}>
+                    <Text style={styles.textstyle}>Email</Text>
+                    <TextInput
+                        style= {[styles.textinput, {color: currentTheme.txtColor}]}
+                        autoCorrect={false}
+                        autoCompleteType='email'
+                        value= {email}
+                        onChangeText={(value) => setuserdata({...userdata, email: value})}
+                    />
+                </View>
+                <View style = {[styles.actionbox, {
+                    borderBottomColor: currentTheme.tabActive
+                }]}>
+                    <Text style={styles.textstyle}>Phone</Text>
+                    <TextInput
+                        style= {[styles.textinput, {color: currentTheme.txtColor}]}
+                        autoCompleteType='tel'
+                    />
+                </View>
+                <View style = {[styles.actionbox, {
+                    borderBottomColor: currentTheme.tabActive
+                }]}>
+                    <Text style={styles.textstyle}>About</Text>
+                    <TextInput
+                        style= {[styles.textinput, {color: currentTheme.txtColor}]}
+                    />
+                </View>
             </View>
             <BottomSheet 
             ref={sheetRef}
@@ -192,10 +229,10 @@ const styles = StyleSheet.create({
     },
     header: {
         height: 50,
-        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        borderBottomWidth: 0.5
     },
     headerTxt: {
         fontSize: 22,
@@ -216,10 +253,10 @@ const styles = StyleSheet.create({
         padding: 20
     },
     textinput: {
-      borderBottomWidth: 2,
-      borderBottomColor: 'grey',
-      marginBottom: 15,
-      fontSize: 20,
+      fontSize: 18,
+      flex: 1,
+      textAlign: 'right',
+      fontWeight: 'bold'
     },
     textstyle: {
         fontSize: 16,
@@ -257,6 +294,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    actionbox: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottomWidth: 0.5,
+        marginBottom: 15
+    }
 })
 
 export default EditProfile

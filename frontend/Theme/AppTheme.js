@@ -19,6 +19,7 @@ const AppTheme = {
         button: '#dbdbdb',
         btnText: 'black',
         editcamicon: '#3D4039',
+        headerbc: 'black'
     },
     darkTheme: {
         backgroundColor: '#00010D',
@@ -29,7 +30,8 @@ const AppTheme = {
         hpText: 'grey',
         button: '#0E1621',
         btnText: 'white',
-        editcamicon: '#D9D3C7'
+        editcamicon: '#D9D3C7',
+        headerbc: '#8095BF'
     }
 }
 

@@ -7,6 +7,7 @@ import { View,
         TouchableOpacity, 
         ImageBackground} from 'react-native'
 import Fontisto from 'react-native-vector-icons/Fontisto'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import RNPickerSelect from 'react-native-picker-select'
 import { useState, createRef } from 'react'
 import BottomSheet from 'reanimated-bottom-sheet'
@@ -109,6 +110,104 @@ const CreateProfile = ({navigation}) => {
                 [styles.container, {opacity: 0.1}] :
                 styles.container
             }>
+                {/* <View style={{
+                    alignItems: 'center',
+                    marginTop: 15
+                }}>
+                    <Image 
+                        source={{
+                            uri: image
+                        }}
+                        style={{
+                            height: 150,
+                            width: 150,
+                            borderRadius: 75
+                        }}
+                    />
+                    <View 
+                        onPress={openBottomSheet}
+                        style={{
+                        height: 40,
+                        width: 40,
+                        borderRadius: 20,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'absolute',
+                        right: 120,
+                        bottom: 0,
+                        backgroundColor: 'green',
+                    }}>
+                        <Ionicons 
+                            name='camera-reverse-outline'
+                            size={25}
+                            color= 'white'
+                        />
+                    </View>
+                </View>
+                <View style={styles.body}>
+                    <View style={styles.actionbox}>
+                        <Text>Username</Text>
+                        <TextInput 
+                            style={styles.txtInput}
+                        />
+                    </View>
+                    <View style={styles.actionbox}>
+                        <Text>Age</Text>
+                        <TextInput 
+                            style={styles.txtInput}
+                        />
+                    </View>
+                    <View>
+                        <Text>Gender</Text>
+                    <RNPickerSelect
+                    placeholder={{
+                        label: 'select your gender...',
+                        value: null,
+                        color: '#9ea0a4'
+                    }} 
+                    onValueChange={(value) => {setuserprofile({...userprofile, gender: value})}}
+                    useNativeAndroidPickerStyle={false}
+                    items={[
+                        {label: 'Male', value: 'male'},
+                        {label: 'Female', value: 'female'}
+                    ]}
+                    style={{
+                        placeholder: {
+                          fontSize: 16,
+                          color: 'grey',
+                        },
+                        inputAndroid: {
+                          fontSize: 16,
+                          paddingHorizontal: 20,
+                          paddingVertical: 10,
+                          borderWidth: 1,
+                          borderRadius: 30, 
+                          borderColor: 'black',
+                          color: 'black',
+                          marginVertical: 10,
+                          backgroundColor: '#fefefe'
+                        },
+                        iconContainer: {
+                          top: 25,
+                          right: 10
+                        },
+                    }}
+                    Icon={() => {
+                        return (
+                            <Fontisto 
+                                name="angle-down" 
+                                size={20} color="gray"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: 0
+                                }}
+                            />
+                        )
+                      }}
+                    />
+                    </View>
+                </View> */}
                 <View style={{
                     height: 150,
                     flexDirection: 'row',
@@ -234,6 +333,7 @@ const CreateProfile = ({navigation}) => {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
                     <Text style={styles.buttontxt}>DONE</Text>
                 </TouchableOpacity>
+
             </Animated.View>
             <BottomSheet 
             ref={sheetRef}
@@ -252,14 +352,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#ECEBF0'
     },
     txtInput: {
-        borderBottomWidth: 1,
-        borderTopWidth: 1,
+        borderWidth: 0.5,
         paddingLeft: 20,
         fontSize: 16,
-        color: 'black',
+        color: 'red',
         marginVertical: 10,
         borderColor: 'black',
-        backgroundColor: '#fefefe'
+        backgroundColor: '#fefefe',
+        borderRadius: 30,
+        marginHorizontal: 10
     },
     header: {
         backgroundColor: '#FFFFFF',
@@ -317,6 +418,12 @@ const styles = StyleSheet.create({
         letterSpacing: 1.2,
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    actionbox: {
+        marginVertical: 10
+    },
+    body: {
+        marginHorizontal: 20
     }
 })
 

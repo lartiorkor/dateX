@@ -24,6 +24,10 @@ const SettingsScreen = ({navigation}) => {
     const {currentTheme, toggleTheme} = React.useContext(ThemeContext)
     const {name} = userdata
     const {profilepic, username} = userprofile
+    const switchTheme = () => {
+        setIsEnabled(!isEnabled)
+        toggleTheme()
+    }
 
     return (
         <View style={[styles.container, {backgroundColor: currentTheme.backgroundColor}]}>
@@ -68,10 +72,10 @@ const SettingsScreen = ({navigation}) => {
                         fontWeight: 'bold'
                     }}>Dark Theme</Text>
                     <Switch
-                        trackColor={{ false: "#767577", true: "#f4f3f4" }}
-                        thumbColor={isEnabled ? "#25DB1F" : "#f4f3f4"}
+                        trackColor={{ false: "#767577", true: "#25DB1F" }}
+                        thumbColor={notifEnabled ? "#f4f3f4" : "#f4f3f4"}
                         ios_backgroundColor="#3e3e3e"
-                        onValueChange={() => toggleTheme()}
+                        onValueChange={switchTheme}
                         value={isEnabled}
                     />
                 </View>
@@ -83,8 +87,8 @@ const SettingsScreen = ({navigation}) => {
                         fontWeight: 'bold'
                     }}>Notifications</Text>
                     <Switch
-                        trackColor={{ false: "#767577", true: "#f4f3f4" }}
-                        thumbColor={notifEnabled ? "#25DB1F" : "#f4f3f4"}
+                        trackColor={{ false: "#767577", true: "#25DB1F" }}
+                        thumbColor={notifEnabled ? "#f4f3f4" : "#f4f3f4"}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={notifToggle}
                         value={notifEnabled}

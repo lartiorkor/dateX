@@ -1,15 +1,15 @@
 import React from 'react'
 import { View,Text,StyleSheet,ScrollView,Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
- 
+import ThemeContext from './context/ThemeContext';
  
  
  const Home = () => {
-
+  const {currentTheme} = React.useContext(ThemeContext)
    return (
-     <View style={{height:150}}>
+     <View style={{height:150, borderTopWidth: 0.5, borderColor: currentTheme.tabInactive, paddingHorizontal: 10, marginTop: 5}}>
          
-            <Text style={{marginBottom:5,marginLeft:10}}>New</Text>
+            <Text style={{marginVertical:5, color: currentTheme.txtColor}}>Recent Matches</Text>
          
          
             <ScrollView style={{flex:1 }} horizontal showsHorizontalScrollIndicator={false}  >
@@ -19,7 +19,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -27,7 +27,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel Dorkenoo</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel Dorkenoo</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -35,7 +35,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -43,7 +43,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -51,7 +51,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -59,7 +59,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -67,7 +67,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -75,7 +75,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
                 <View style={{width:85, padding:5, marginRight:10}}>
                   <LinearGradient colors={['#bc2a8d','#e95950','#fccc63']}
@@ -83,7 +83,7 @@ import LinearGradient from 'react-native-linear-gradient';
                 
                 <Image style={styles.userImage} source={require ('../Assets/1.jpg')}/>
                   </LinearGradient>
-                  <Text style={styles.userName}>Bel WavesInTheOcean</Text>
+                  <Text style={[styles.userName, {color: currentTheme.txtColor}]}>Bel WavesInTheOcean</Text>
                 </View>
             </ScrollView>
 

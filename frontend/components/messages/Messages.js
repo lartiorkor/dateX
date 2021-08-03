@@ -1,6 +1,7 @@
 import React from 'react'
-import { View,Text,FlatList,StyleSheet} from 'react-native';
+import { View,Text,FlatList,StyleSheet, TextBase} from 'react-native';
 import ChatListItem from '../chatlistitem/ChatListItem';
+import ThemeContext from '../context/ThemeContext';
 
 
 const DATA = [
@@ -56,41 +57,31 @@ const DATA = [
  
  
 const Messages = ({navigation}) => {
-    return (
-      <View style={styles.main}>
-      <Text style={{fontWeight:'bold',fontSize:16,textAlign:'left'}}>Messages</Text>
-        <View style={styles.container}>
-           
-            <FlatList 
-            data={DATA}
-            renderItem={({item}) =>     
-              <ChatListItem message={item.title} navigation={navigation} identifier={item.id}/>}
-              keyExtractor={item => item.id}
-              showsVerticalScrollIndicator={false}/>
-        
-        </View>  
-        </View>     
-              
-      
+  const {currentTheme} = React.useContext(ThemeContext)
+  return (
+    <View style={styles.main}>
+      <View style={{borderBottomWidth: 0.5, paddingBottom: 5, borderColor: currentTheme.tabInactive}}>
+        <Text style={{fontWeight: 'bold', color: currentTheme.txtColor, marginLeft: 10}}>Messages</Text>
+      </View>
+      <View style={styles.container}>
+        <FlatList 
+          data={DATA}
+          renderItem={({item}) =>     
+            <ChatListItem message={item.title} navigation={navigation} identifier={item.id}/>}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}/>
+      </View>  
+    </View>     
     );
-  };
+};
 
-  const styles = StyleSheet.create({
-    container: {
- 
-      paddingTop:10,
-      alignItems:'center',
-      justifyContent:'center',
-    
-   },
-   main: {
-     flex:1,
-     paddingLeft:5,
-     paddingRight:5,
-     
-   }
+const styles = StyleSheet.create({
+  container: {
+    paddingTop:10,
+  },
+  main: {
+   flex:1,  
+  }
   });
   
-  
-  
-  export default Messages;
+export default Messages;

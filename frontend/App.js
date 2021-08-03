@@ -14,6 +14,9 @@ import UserProfileContext from './components/context/UserProfileContext'
 
 const Stack = createStackNavigator();
 
+const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
+'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
+
 const App = () => {
   const [userdata, setuserdata] = useState({
     name: '',
@@ -26,7 +29,7 @@ const App = () => {
     username: '',
     age: '',
     gender: '',
-    profilepic: ''
+    profilepic: avatars[Math.random() * 2]
   })
 
   return (
