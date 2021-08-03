@@ -5,7 +5,7 @@ const db = createPool({
     host: 'mysql-39281-0.cloudclusters.net',
     port: 39296,
     user: 'admin',
-    password: '12345678',
+    password: 'datex123',
     database: 'datex'
 });
 
