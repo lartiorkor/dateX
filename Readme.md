@@ -46,9 +46,9 @@ Usage
 ---
 
 License
->You can check out the full license [here](dfdjdfhdf.com"here")`
+>You can check out the full license [MIT License](LICENSE)
 
-This project is licensed under the terms ___________.
+This project is licensed under the terms of the MIT License.
 
 ---
 
