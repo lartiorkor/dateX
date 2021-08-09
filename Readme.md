@@ -4,8 +4,7 @@
 
 About The Project
 
-DateX is a dating application powered by React and Node that  meant to randomly match people with the goal of developing personal,cordial or romantic relationships. It provides the main functions you'd expect from a dating chat app, such as emojis, private messages, an admin system, etc with additional functionality such as_____
-![DateX interface](.png)
+DateX is a dating application powered by React and Node that  meant to randomly match people with the goal of developing personal,cordial or romantic relationships. It provides the main functions you'd expect from a dating chat app, such as emojis, private messages, an admin system, etc with additional functionality such as random matching and speed dating.
 
 
 ---
@@ -17,24 +16,22 @@ Click [DateX](https://www.figma.com/proto/rMkGKEqQR5kJ7c64KPgjiZ/Low-Fidelity-Da
 
 Built With
 This application was built using these frameworks
-* hhvvh
-* jbjbjb
-* kknkn
+* React
+* Node
 
 ---
 
 Features
-* hhvvh
-* jbjbjb
-* kknkn
-* hhvvh
-* jbjbjb
-* kknkn
+* Private messaging
+* Emoji support
+* Random matching
+* Time-bound chats
+* 
+* 
 
 ---
 
 Getting Started
-dssadsdsdasd
 
 Prerequisites
 Clone this repo to your desktop and >run npm
