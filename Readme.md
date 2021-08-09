@@ -46,14 +46,8 @@ Usage
 ---
 
 License
->You can check out the full license [MIT License](LICENSE)
+>You can check out the full license [Here](LICENSE)
 
 This project is licensed under the terms of the MIT License.
 
 ---
-
-Acknowledgements
-* [dsbdsnvk](dfdjdfhdf.com"fjfvkbkj")
-* [dsbdsnvk](dfdjdfhdf.com"fjfvkbkj")
-* [dsbdsnvk](dfdjdfhdf.com"fjfvkbkj")
-* [dsbdsnvk](dfdjdfhdf.com"fjfvkbkj")
