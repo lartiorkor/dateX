@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import ThemeContext from '../components/context/ThemeContext'
+import MapView from 'react-native-maps'
 
 
 const MatchScreen = () => {
@@ -9,7 +10,18 @@ const MatchScreen = () => {
         <View style={[styles.container, {
             backgroundColor: currentTheme.backgroundColor
         }]}>
-            <Text>Match Screen</Text>
+            <MapView
+                style ={{
+                    width: '100%',
+                    height: '100%'
+                }}
+                initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+            />
         </View>
     )
 }
