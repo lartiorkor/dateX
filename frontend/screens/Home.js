@@ -13,8 +13,7 @@ import ThemeContext from '../components/context/ThemeContext'
 import AppTheme from '../Theme/AppTheme'
 import SettingsScreen from './SettingsScreen'
 
-const myTab = createMaterialBottomTabNavigator()
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
 
 const Home = () => {
     const [theme, settheme] = useState('lightTheme');
