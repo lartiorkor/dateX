@@ -10,7 +10,8 @@ const ChatListItem = ({message,navigation,identifier}) => {
     
     return (
         <TouchableWithoutFeedback
-            onPress={()=>navigation.navigate('chatroomscreen',{id:identifier})}>
+            // onPress={()=>navigation.navigate('chatroomscreen',{id:identifier})}
+            onPress={()=>navigation.navigate('ChatRoomScreen')}>
             <View style={styles.container}>
                 <Image 
                     style={styles.image}

@@ -1,5 +1,5 @@
-import React, {useState, useContext} from 'react'
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native'
+import React, {useState, useRef} from 'react'
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Pressable, StatusBar } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Animated from 'react-native-reanimated'
 import ImagePicker from 'react-native-image-crop-picker'
@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import ThemeContext from '../components/context/ThemeContext'
 import UserDataContext from '../components/context/UserDataContext'
 import UserProfileContext from '../components/context/UserProfileContext'
+import RBSheet from "react-native-raw-bottom-sheet";
 
 import ProfilePicture from './ProfilePicture'
 
@@ -35,20 +36,9 @@ const EditProfileScreen = ({navigation}) => {
     const {username, profilepic} = userprofile
     const {email} = userdata
     const {currentTheme} = React.useContext(ThemeContext) 
-    const [opView, setopView] = useState(false)
     const [image, setimage] = useState(avatars[Math.floor(Math.random() * 2)])
-    const sheetRef = React.useRef(null)
-    let fall = new Animated.Value(1)
 
-    const openBottomSheet = () => {
-        sheetRef.current.snapTo(0)
-        setopView(true)
-    }
-
-    const closeBottomSheet = () => {
-        sheetRef.current.snapTo(1)
-        setopView(false)
-    }
+    const refRBSheet = useRef();
 
     const takePhotoFromCamera = () => {
         ImagePicker.openCamera({
@@ -57,9 +47,10 @@ const EditProfileScreen = ({navigation}) => {
             cropping: true,
           }).then(image => {
             console.log(image);
+            setimage(image.path)
             setuserprofile({...userprofile, profilepic: image.path})
-            closeBottomSheet()
-        });  
+        });
+        refRBSheet.current.close()  
     }
 
     const choosePhotoFromLibrary = () => {
@@ -69,57 +60,21 @@ const EditProfileScreen = ({navigation}) => {
             cropping: true
           }).then(image => {
             console.log(image);
+            setimage(image.path)
             setuserprofile({...userprofile, profilepic: image.path})
-            closeBottomSheet()
-        });         
+        });
+        refRBSheet.current.close()
     }
 
-    const renderContent = () => (
-        <View style={{
-          backgroundColor: currentTheme.backgroundColor,
-          padding: 16,
-          justifyContent: 'center'
-        }}> 
-          <View style={{alignItems: 'center'}}>
-            <Text style={[styles.panelTitle, {
-                color: currentTheme.txtColor
-            }]}>
-              Upload Photo
-            </Text>
-            <Text style={[styles.panelSubtitle, {
-                color: currentTheme.txtColor
-            }]}>
-              Choose your profile picture
-            </Text>
-          </View>
-          <TouchableOpacity style={[styles.panelButton, {
-              backgroundColor: currentTheme.button
-          }]} onPress={takePhotoFromCamera}>
-            <Text style={[styles.panelButtonTitle, {color: currentTheme.txtColor}]}>TAKE PHOTO</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.panelButton, {
-              backgroundColor: currentTheme.button
-          }]} onPress={choosePhotoFromLibrary}>
-            <Text style={[styles.panelButtonTitle, {
-                color: currentTheme.txtColor
-            }]}>CHOOSE PHOTO</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={[styles.panelButton, {
-                backgroundColor: currentTheme.button
-            }]}
-            onPress={closeBottomSheet}
-            >
-            <Text style={[styles.panelButtonTitle, {
-                color: currentTheme.txtColor
-            }]}>CANCEL</Text>
-          </TouchableOpacity>
-        </View>
-      );
     return (
         <View style={[styles.container, {
             backgroundColor: currentTheme.backgroundColor
         }]}>
+            <StatusBar 
+                hidden={false}
+                barStyle={currentTheme.name==='light' ? 'dark-content' : 'light-content'}
+                backgroundColor={currentTheme.backgroundColor}
+            />
             <View style={[styles.header, {
                 backgroundColor: currentTheme.backgroundColor,
                 borderColor: currentTheme.headerbc
@@ -149,12 +104,12 @@ const EditProfileScreen = ({navigation}) => {
                         />
                     </TouchableOpacity>
                     <TouchableOpacity 
-                    onPress= {openBottomSheet}
+                    onPress={() => refRBSheet.current.open()}
                     style= {{
-                                borderRadius: 20,
+                                borderRadius: 22,
                                 backgroundColor: currentTheme.editcamicon,
-                                width: 40,
-                                height: 40,
+                                width: 45,
+                                height: 45,
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 position: 'absolute',
@@ -163,7 +118,7 @@ const EditProfileScreen = ({navigation}) => {
                          }}>
                         <Ionicons 
                             name= 'camera-reverse-outline'
-                            size= {30}
+                            size= {24}
                             color={currentTheme.backgroundColor}
                         />
                     </TouchableOpacity>
@@ -212,13 +167,55 @@ const EditProfileScreen = ({navigation}) => {
                     />
                 </View>
             </View>
-            <BottomSheet 
-            ref={sheetRef}
-            snapPoints={[300, 0]}
-            renderContent={renderContent}
-            initialSnap={1}
-            borderRadius={10}
-            />
+            <RBSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={300}
+                customStyles={{
+                    draggableIcon: {
+                        backgroundColor: currentTheme.primaryColor
+                    },
+                    container: {
+                        backgroundColor: currentTheme.bottomSheetBg
+                    }
+                }}
+            >
+                <View style={[styles.bottomSheetContainer, {backgroundColor: currentTheme.bottomSheetBg}]}>
+                    <View style={styles.bottomSheetHead}>
+                        <Text style={{
+                            textAlign: 'center',
+                            fontSize: 28,
+                            fontWeight: 'bold',
+                            color: currentTheme.colorAccent
+                        }}>Upload Photo</Text>
+                        <Text style={{
+                            textAlign: 'center',
+                            fontSize: 18,
+                            color: currentTheme.colorAccent,
+                            marginBottom: 15
+                        }}>Choose Your Profile Picture</Text>
+                    </View>
+                    <Pressable 
+                        style={[styles.bottomSheetbtn, {backgroundColor: currentTheme.primaryColor}]}
+                        onPress={takePhotoFromCamera}
+                    >
+                        <Text style={styles.bottomSheetbtnTxt}>TAKE PHOTO</Text>
+                    </Pressable>
+                    <Pressable 
+                        style={[styles.bottomSheetbtn, {backgroundColor: currentTheme.primaryColor}]}
+                        onPress={choosePhotoFromLibrary}
+                    >
+                        <Text style={styles.bottomSheetbtnTxt}>CHOOSE PHOTO</Text>
+                    </Pressable>
+                    <Pressable 
+                        style={[styles.bottomSheetbtn, {backgroundColor: currentTheme.primaryColor}]}
+                        onPress={() => refRBSheet.current.close()}
+                    >   
+                        <Text style={styles.bottomSheetbtnTxt}>CANCEL</Text>
+                    </Pressable>
+                </View>
+            </RBSheet>
         </View>
     )
 }
@@ -300,7 +297,25 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderBottomWidth: 0.5,
         marginBottom: 15
-    }
+    },
+    bottomSheetContainer: {
+        paddingHorizontal: 15,
+    },
+    bottomSheetHead: {
+        marginBottom: 5
+    },
+    bottomSheetbtn: {
+        borderRadius: 15,
+        height: 50,
+        marginBottom: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    bottomSheetbtnTxt: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#fff'
+    },
 })
 
 export default EditProfile

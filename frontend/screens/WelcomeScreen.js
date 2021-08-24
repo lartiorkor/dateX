@@ -19,23 +19,23 @@ const WelcomeScreen = ({navigation}) => {
                             source={require('../Assets/newlogo.png')}
                             style={styles.logo}
                         />
-
-                        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                            <Text style={styles.txt}>Create a new account</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.footer}>
-                    <TouchableOpacity style={styles.btnContainer}
+                    <TouchableOpacity style={[styles.btnContainer, {
+                        borderColor: lightTheme.light,
+                        borderWidth: 2,
+                    }]}
                         onPress={() => navigation.navigate('Login')}
                     >
-                        <Text style={styles.btnText}>LOG IN WITH EMAIL</Text>
+                        <Text style={styles.btnText}>LOG IN</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnContainer}>
-                        <Text style={styles.btnText}>LOG IN WITH GOOGLE</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.footerTxtContainer}>
-                        <Text style={styles.footerTxt}>Trouble logging in?</Text>
+                    <TouchableOpacity style={[styles.btnContainer, {
+                        backgroundColor: lightTheme.light
+                    }]}
+                        onPress={() => navigation.navigate('SignUp')}
+                    >
+                        <Text style={[styles.btnText, {color: lightTheme.colorAccent}]}>CREATE NEW ACCOUNT</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -53,24 +53,23 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: 1.2,
+        marginTop: 50
     },
     btnContainer: {
         borderRadius: 30,
         marginVertical: 10, 
         alignItems: 'center',
-        borderColor: lightTheme.rn_iconscolor,
         paddingVertical: 12,
-        backgroundColor: lightTheme.rn_iconscolor
     },
     btnText: {
         fontSize: 18,
-        color: lightTheme.black,
+        color: lightTheme.light,
         letterSpacing: 1.2,
         fontWeight: 'bold'
     },
     footerTxt: {
-        fontSize: 18,
-        color: lightTheme.textColor
+        fontSize: 16,
+        color: lightTheme.light,
     },
     footerTxtContainer: {
         marginTop: 20,

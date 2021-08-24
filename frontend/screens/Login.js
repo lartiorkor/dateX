@@ -1,16 +1,17 @@
 import React from 'react'
 import { 
     View, Text,
-    ImageBackground, TouchableOpacity,
+    Image, TouchableOpacity,
     StyleSheet, TextInput,
-    StatusBar
+    StatusBar,
+    Pressable
 } from 'react-native'
 import { useState } from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import LinearGradient from 'react-native-linear-gradient'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import  FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
-import Fontisto from 'react-native-vector-icons/Fontisto'
 import lightTheme from '../Theme/colors'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
@@ -23,125 +24,135 @@ const Login = ({navigation}) => {
     const [showPassword, setshowPassword] = useState(true);
     let { password } = loginObj;
 
+    const loginEvent = () => {
+        navigation.navigate('Central')
+    }
+
     return (
-        <ImageBackground
-            style={styles.container}
-            source={require('../Assets/background.png')}
-            resizeMode='cover'
-        >
-            <StatusBar 
-            />
-            <View style={styles.headPanel}>
-                <TouchableOpacity 
-                    style={{marginTop: 10,}}
-                    onPress={() => navigation.goBack()}>
+        <LinearGradient style={styles.container} colors={[lightTheme.primaryColor, lightTheme.colorAccent]}>
+            <KeyboardAwareScrollView style={{flex: 1}}> 
+                {/* <View style={{
+                        flexDirection: 'row',
+                        marginTop: 5,
+                        alignItems: 'center',
+                        marginLeft: -10
+                    }}>
                     <Feather 
                         name='chevron-left'
                         size={50}
-                    />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.loginContainer}>
-                <View style={
-                    loginObj.email === '' ? styles.empty_txtinputbox : styles.txtinputbox
-                }>
-                    <View style={{justifyContent: 'center'}}>
-                        <Icon 
-                            name='person'
-                            size={25}
-                            color='grey'
-                            style={{paddingLeft: 10}}
-                        />
-                    </View>
-                    <TextInput 
-                        placeholder='Email'
-                        placeholderTextColor='grey'
-                        style={styles.txtinput}
-                        value={loginObj.email}
-                        onChangeText={(text) => setloginObj({...loginObj, email: text})}
+                        color={lightTheme.light}
+                        onPress={() => navigation.goBack()}
+                    /> */}
+                    <Text style={styles.headText}>Login</Text>
+                {/* </View> */}
+                <View style={{
+                    height: 150,
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 100
+                }}>
+                    <Image 
+                        source={
+                            require('../Assets/newlogo.png')
+                        }
                     />
                 </View>
-                <View style={
-                    loginObj.password === '' ? styles.empty_txtinputbox : styles.txtinputbox
-                }>
-                    <View style={{justifyContent: 'center'}}>
-                        <Icon 
+                <View style={{marginTop: 15}}>
+                    <View style={styles.txtinputbox}>
+                        <FontAwesome 
+                            name='user'
+                            size={20}
+                            color={lightTheme.light}
+                            style={styles.userIcon}
+                        />
+                        <TextInput 
+                            placeholder='Email'
+                            placeholderTextColor={lightTheme.textColor}
+                            style={styles.txtinput}
+                            value={loginObj.email}
+                            onChangeText={(text) => setloginObj({...loginObj, email: text})}
+                        /> 
+                    </View>
+                    <View style={styles.txtinputbox}>
+                        <FontAwesome 
                             name='lock'
                             size={20}
-                            color='grey'
-                            style={{paddingLeft: 10}}
-                       />
-                    </View>
-                    <TextInput 
-                        placeholder='Password'
-                        placeholderTextColor='grey'
-                        style={styles.txtinput}
-                        value={loginObj.password}
-                        secureTextEntry={showPassword}
-                        onChangeText={(text) => setloginObj({...loginObj, password: text})}
-                    />
-                    <View style={{
-                        position: 'absolute',
-                        top: 12,
-                        right: 0,
-                        marginRight: 15
-                        }}>
-                            {
-                                password !== '' ? 
-                                <TouchableOpacity 
-                                onPress={() => setshowPassword(!showPassword)} >
-                                    {
-                                        showPassword ?
-                                        <Feather 
-                                        name='eye'
-                                        color='grey'
-                                        size={20}
-                                        />: 
-                                        <Feather 
-                                            name='grey'
-                                            size={20}
-                                        />
-                                    }
-                                </TouchableOpacity> : null
+                            color={lightTheme.light}
+                            style={styles.userIcon}
+                        />
+                        <TextInput 
+                            placeholder='Password'
+                            placeholderTextColor={lightTheme.textColor}
+                            style={styles.txtinput}
+                            secureTextEntry={showPassword}
+                            value={loginObj.password}
+                            onChangeText={(text) => setloginObj({...loginObj, password: text})}
+                        /> 
+                        {
+                            showPassword ?
+                            <Feather 
+                                name='eye'
+                                color={lightTheme.light}
+                                size={20}
+                                style={{marginRight: 10}}
+                                onPress={() => setshowPassword(!showPassword)}
+                            /> :
+                            <Feather 
+                                name='eye-off'
+                                color={lightTheme.light}
+                               size={20}
+                               style={{marginRight: 10}}
+                               onPress={() => setshowPassword(!showPassword)}
+                            />
                         }
                     </View>
                 </View>
-                <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginHorizontal: 5
-                    }}>
-                    <BouncyCheckbox
-                        size={20}
-                        fillColor="#51ff17"
-                        unfillColor="#FFFFFF"
-                        text="Remember Me"
-                        iconStyle={{ borderColor: lightTheme.black }}
-                        textStyle={{ color: lightTheme.black }}
-                        onPress={(isChecked: boolean) => {}}
-                    />
-                    <View style={{ marginVertical: 5, alignItems: 'center'}}>
-                        <TouchableOpacity>
-                            <Text style={{color: lightTheme.black}}>Forgot Password?</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <View style={[styles.btnContainer, {marginTop: 20}]}>
-                        <Text style={styles.btnText}>LOGIN</Text>
-                    </View>
+                <TouchableOpacity style={{
+                    alignSelf: 'flex-end',
+                    marginTop: 5
+                }}>
+                    <Text style={{
+                        fontSize: 16,
+                        color: lightTheme.light,
+                        fontWeight: '600'
+                    }}>Forgot Password?</Text>
                 </TouchableOpacity>
-            </View>
-        </ImageBackground>
+                <Pressable style={styles.btnContainer} onPress={loginEvent}>
+                    <Text style={styles.btnText}>SIGN IN</Text>
+                </Pressable>
+                <View style={{
+                    marginTop: 50,
+                    flexDirection: 'row',
+                    justifyContent: 'center'
+                }}>
+                    <Text style={{
+                        fontSize: 16,
+                        color: lightTheme.light
+                    }}>Don't have an account? </Text>
+                    <Pressable onPress={() => {navigation.navigate('SignUp')}}>
+                        <Text style={{
+                            fontSize: 16,
+                            color: lightTheme.light,
+                            fontWeight: 'bold'
+                        }}> SignUp</Text>
+                    </Pressable>
+                </View>
+            </KeyboardAwareScrollView>
+        </LinearGradient>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingHorizontal: 20,
     },
-    headPanel: {
-        flex: 1.1,
+    headText: {
+        fontSize: 26,
+        color: lightTheme.textColor,
+        fontWeight: '700',
+        marginTop: 35
     },
     loginContainer: {
         flex: 0.9,
@@ -157,29 +168,32 @@ const styles = StyleSheet.create({
     },
     txtinputbox: {
         flexDirection: 'row',
-        marginVertical: 10,
+        marginVertical: 5,
         borderWidth: 2,
-        borderColor: lightTheme.steelblue,
-        borderRadius: 30
+        borderColor: lightTheme.light,
+        borderRadius: 30,
+        alignItems: 'center'
     },
     txtinput: {
         marginLeft: 15,
-        color: lightTheme.black,
+        color: lightTheme.light,
         fontSize: 16,
         flex: 1
     },
+    userIcon: {
+        marginLeft: 10
+    },
     btnContainer: {
         borderRadius: 30,
-        marginVertical: 10,
+        marginTop: 70,
         alignItems: 'center',
-        backgroundColor: lightTheme.colorAccent,
-        paddingVertical: 13,
+        backgroundColor: lightTheme.light,
+        paddingVertical: 10,
     },
     btnText: {
-        color: lightTheme.textColor,
-        fontSize: 18,
-        fontWeight: 'bold',
-        letterSpacing: 1.2
+        color: lightTheme.colorAccent,
+        fontSize: 20,
+        fontWeight:'bold'
     }
 })
 

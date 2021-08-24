@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import ThemeContext from '../components/context/ThemeContext'
 import MapView from 'react-native-maps'
+import FadeInText from '../components/FadeInText'
 
 
 const MatchScreen = () => {
@@ -16,12 +17,18 @@ const MatchScreen = () => {
                     height: '100%'
                 }}
                 initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
+                    latitude: 6.67331,
+                    longitude: -1.56531,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
             />
+            <View style={{
+                    position: 'absolute',
+                    bottom: 50
+                }}>
+                    <FadeInText />
+                </View>
         </View>
     )
 }

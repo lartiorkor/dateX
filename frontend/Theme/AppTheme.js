@@ -1,5 +1,6 @@
 const AppTheme = {
     lightTheme: {
+        name: 'light',
         primaryColor: '#ff695e',
         colorAccent: '#fc054b',
         textColor: 'white',
@@ -18,10 +19,14 @@ const AppTheme = {
         txtColor: 'black',
         button: '#dbdbdb',
         btnText: 'black',
-        editcamicon: '#3D4039',
-        headerbc: 'black'
+        editcamicon: '#ff695e',
+        headerbc: 'black',
+        bottomSheetBg: '#fff'
     },
     darkTheme: {
+        name: 'dark',
+        primaryColor: '#8095BF',
+        colorAccent: '#8095BF',
         backgroundColor: '#00010D',
         tabColor: '#0A0B0D',
         tabActive: '#8095BF',
@@ -31,7 +36,8 @@ const AppTheme = {
         button: '#0E1621',
         btnText: 'white',
         editcamicon: '#D9D3C7',
-        headerbc: '#8095BF'
+        headerbc: '#8095BF',
+        bottomSheetBg: '#0E1621'
     }
 }
 

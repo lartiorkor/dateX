@@ -8,9 +8,10 @@ import SignUp from './screens/SignUp'
 import CreateProfile from './screens/CreateProfile'
 import WelcomeScreen from './screens/WelcomeScreen'
 import lightTheme from './Theme/colors'
-import Home from './screens/Home'
+import Central from './screens/Central'
 import UserDataContext from './components/context/UserDataContext'
 import UserProfileContext from './components/context/UserProfileContext'
+
 
 const Stack = createStackNavigator();
 
@@ -53,7 +54,7 @@ const App = () => {
           headerTitleAlign: 'center',
           headerLeft: null
         }}/>
-        <Stack.Screen name='Home' component={Home} options={{
+        <Stack.Screen name='Central' component={Central} options={{
           headerShown: false
         }}/>
       </Stack.Navigator>

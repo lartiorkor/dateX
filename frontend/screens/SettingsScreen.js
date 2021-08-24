@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity, Switch } from 'react-native'
+import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity, Switch, StatusBar } from 'react-native'
 import lightTheme from '../Theme/colors'
 import darkTheme from '../Theme/dark'
 import ThemeContext from '../components/context/ThemeContext'
@@ -31,6 +31,11 @@ const SettingsScreen = ({navigation}) => {
 
     return (
         <View style={[styles.container, {backgroundColor: currentTheme.backgroundColor}]}>
+            <StatusBar 
+                hidden={false}
+                barStyle={currentTheme.name==='light' ? 'dark-content' : 'light-content'}
+                backgroundColor={currentTheme.backgroundColor}
+            />
             <View style={[styles.header, {backgroundColor: currentTheme.button }]}>
                 <Text style={[styles.headertxt, {color: currentTheme.txtColor}]}>Settings</Text>
                 <View style={styles.headerpanel}>

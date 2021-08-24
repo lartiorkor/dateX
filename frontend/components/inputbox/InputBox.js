@@ -1,82 +1,85 @@
-import React,{useState} from 'react'
-import {View,Text,StyleSheet, TextInput,Button, TouchableOpacity} from 'react-native';
-import { styles } from 'styled-system';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
- 
- 
+import React, {useState} from 'react'
+import { View, Text, StyleSheet, TextInput, Platform, Pressable } from 'react-native'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-export default function  InputBox  () {
-    const [message,setMessage] = useState('');
-    const onPress =()=> {
-        console.warn("Sending : ${message}")
-        setMessage("");
-    }
-    return (
-       <View style={styles2.container} >
-           <View style={styles2.main}> 
-               
-                  <TextInput placeholder='Type something' multiline style={styles2.input}
-                  value={message}
-                  onChangeText={ setMessage}/>
-                    
-           </View>
-           {!!message && 
-           <TouchableOpacity onPress={onPress}>
-               <View style={styles2.buttonContainer} >
-               <Button color="green" style={styles2.button} title="Send"/>
-                
-           </View>
-           </TouchableOpacity>}
-            
-             
-       </View>
-
+const InputBox = () => {
+    const [message, setMessage] = useState('')
+    return(
+        <View style={styles.rootcontainer}>
+            <View style={styles.inputContainer}>
+                <SimpleLineIcons 
+                    name='emotsmile' size={24} color="#595959" style={{marginRight: 5}}
+                />
+                <TextInput 
+                    placeholder='Message...'
+                    value={message}
+                    onChangeText={(text) => setMessage(text)}
+                    style={styles.input}
+                    textAlignVertical='top'
+                />
+            </View>
+            {
+                message ?
+                <Pressable style={styles.buttonContainer}>
+                    <Ionicons name="send" size={18} color="#ddd"/>
+                </Pressable> :
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center'
+                }}>
+                    <SimpleLineIcons 
+                        name='camera' size={24} color="#595959" style={styles.icon}
+                    />
+                    <SimpleLineIcons 
+                        name='microphone' size={24} color="#595959" style={styles.icon}
+                    />
+                </View>
+            }
+        </View>
     )
-};
+}
 
-const styles2 = StyleSheet.create({
-    container: {
- 
-     
-      flexDirection:'row',
-      alignItems:'flex-end',
-    
-   },
-   main: {
-     flex:1,
-     flexDirection:'row',
-     backgroundColor:'white',
-     padding:10,
-     margin:10,
-     borderRadius:50,
-     alignItems:'center',
+const styles = StyleSheet.create({
+    rootcontainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        paddingVertical: 5
+    },
+    inputContainer: {
+        flex: 1,
+        backgroundColor: '#f2f2f2',
+        marginRight: 10,
+        borderRadius: 25,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#dedede',
+        flexDirection: 'row',
+        padding: 5,
+        height: 40
+    },
+    input: {
+        flex: 1,
+        marginHorizontal: 5,
+        height: 40,
+        fontSize: 16
+    },
+    icon: {
+        marginHorizontal: 5
+    },
+    buttonContainer: {
+        height: 40,
+        width: 40,
+        backgroundColor: '#3777f0',
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonText: {
+        fontSize: 35,
+        color: '#fff'
+    }
+})
 
-     
-   },
-   button:{
-        width:50,
-        height:50,
-        borderRadius:50,
-   },
-   buttonContainer:{
-       backgroundColor:'green',
-       borderRadius:50,
-       height:50,
-       width:50,
-       alignItems:'center',
-       justifyContent:'center',
-       padding:10,
-       margin:10,
-    
-       
-   },
-   input:{
-        flex:1,
-        marginHorizontal:10,
-       backgroundColor:'white',
-       padding:10,
-       alignItems:'flex-end',
-   }
-  });
-
-  
+export default InputBox
