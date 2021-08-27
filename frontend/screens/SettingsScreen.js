@@ -107,7 +107,9 @@ const SettingsScreen = ({navigation}) => {
                         fontWeight: 'bold'
                     }}>Language</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, {backgroundColor: currentTheme.button}]}>
+                <TouchableOpacity 
+                onPress={() => navigation.navigate('Privacy')}
+                style={[styles.button, {backgroundColor: currentTheme.button}]}>
                     <Text style={{
                         color: currentTheme.txtColor,
                         fontSize: 16,
@@ -115,13 +117,25 @@ const SettingsScreen = ({navigation}) => {
                         fontWeight: 'bold'
                     }}>Privacy Policy</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, {backgroundColor: currentTheme.button}]}>
+                <TouchableOpacity 
+                onPress={() => navigation.navigate('FAQ')}
+                style={[styles.button, {backgroundColor: currentTheme.button}]}>
                     <Text style={{
                         color: currentTheme.txtColor,
                         fontSize: 16,
                         letterSpacing: 1.2,
                         fontWeight: 'bold'
                     }}>FAQs</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                onPress={() => navigation.navigate('ContactUs')}
+                style={[styles.button, {backgroundColor: currentTheme.button}]}>
+                    <Text style={{
+                        color: currentTheme.txtColor,
+                        fontSize: 16,
+                        letterSpacing: 1.2,
+                        fontWeight: 'bold'
+                    }}>Contact Us</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, {backgroundColor: currentTheme.button}]}>
                     <Text style={{

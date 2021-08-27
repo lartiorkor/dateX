@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import EditProfile from './EditProfile'
 import SettingsScreen from './SettingsScreen'
 import ContactUs from './ContactUs'
+import PrivacyPolicy from './PrivacyPolicy'
+import FAQs from './FAQs'
 
 const settingsStack = createStackNavigator();
 
@@ -18,6 +20,12 @@ const SettingsStackScreen = () => {
                 headerShown: false
             }}/>
             <settingsStack.Screen name='ContactUs' component={ContactUs} options={{
+                headerShown: true
+            }}/>
+            <settingsStack.Screen name='Privacy' component={PrivacyPolicy} options={{
+                headerShown: true
+            }}/>
+            <settingsStack.Screen name='FAQ' component={FAQs} options={{
                 headerShown: true
             }}/>
         </settingsStack.Navigator>
