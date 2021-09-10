@@ -6,27 +6,31 @@ import Feather from 'react-native-vector-icons/Feather'
 import lightTheme from '../Theme/colors'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import UserDataContext from '../components/context/UserDataContext'
+import axios from 'axios';
 
 const {height, width} = Dimensions.get('screen')
 
 
 const SignUp = ({navigation}) => {
+    const signupURL = 'https://datex-server.herokuapp.com/api/auth/signup/';
     const {userdata, setuserdata} = React.useContext(UserDataContext)
-    const {name, email, password} = userdata
-    // const [signUpObj, setsignUpObj] = useState({
-    //     name: '',
-    //     email: '',
-    //     password: '',
-    //     c_password: ''
-    // })
+    const {username, email, password} = userdata
 
     const [showPassword, setshowPassword] = useState(false)
-    const [showc_password, setshowc_password] = useState(false)
-    // let { password, c_password } = signUpObj
-
 
     const signUpEvent = () => {
-        navigation.navigate('Profile')
+        axios.post(signupURL, {
+            username: username,
+            email: email,
+            password: password
+        }).then(
+            (res) => {
+                console.log(res.data)
+                console.log(userdata)
+            }
+        ).catch(
+            (err) => console.log(err)
+        )
     } 
 
     return (
@@ -55,13 +59,13 @@ const SignUp = ({navigation}) => {
                             style={styles.userIcon}
                         />
                         <TextInput 
-                            placeholder='Name'
+                            placeholder='Username'
                             placeholderTextColor={lightTheme.light}
                             autoCompleteType='off'
                             autoCorrect={false}
                             style={styles.txtInput}
-                            value={name}
-                            onChangeText={(text) => setuserdata({...userdata, name: text})}
+                            value={username}
+                            onChangeText={(text) => setuserdata({...userdata, username: text})}
                         />
                     </View>
                     <View style={styles.input}>
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        marginVertical: 10,
+        marginVertical: 20,
         borderColor: lightTheme.light,
         borderTopWidth: 0,
         borderLeftWidth: 0,

@@ -8,9 +8,6 @@ const InputBox = () => {
     return(
         <View style={styles.rootcontainer}>
             <View style={styles.inputContainer}>
-                <SimpleLineIcons 
-                    name='emotsmile' size={24} color="#595959" style={{marginRight: 5}}
-                />
                 <TextInput 
                     placeholder='Message...'
                     value={message}
@@ -45,7 +42,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,
-        paddingVertical: 5
+        paddingVertical: 7,
+        backgroundColor: '#fff'
     },
     inputContainer: {
         flex: 1,

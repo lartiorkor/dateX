@@ -4,6 +4,9 @@ const UserDataContext = React.createContext({
     name: '',
     email: '',
     password: '',
+    accessToken: '',
+    refreshToken: '',
+    userObject: {}
 })
 
 export default UserDataContext;

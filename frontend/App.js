@@ -20,14 +20,16 @@ const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-
 
 const App = () => {
   const [userdata, setuserdata] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
-    confirmpassword: ''
+    accessToken: '',
+    refreshToken: '',
+    userObject: {}
   })
 
   const [userprofile, setuserprofile] = useState({
-    username: '',
+    name: '',
     age: '',
     gender: '',
     profilepic: avatars[Math.random() * 2]

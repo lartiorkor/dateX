@@ -13,10 +13,14 @@ import LinearGradient from 'react-native-linear-gradient'
 import  FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
 import lightTheme from '../Theme/colors'
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-
+import BouncyCheckbox from "react-native-bouncy-checkbox"
+import axios from 'axios'
+import UserDataContext from '../components/context/UserDataContext'
 
 const Login = ({navigation}) => {
+    const loginURL = 'https://datex-server.herokuapp.com/api/auth/login/';
+    const {userdata, setuserdata} = React.useContext(UserDataContext)
+    const {accessToken, refreshToken, userObject} = userdata
     const [loginObj, setloginObj] = useState({
         email: '',
         password: ''
@@ -25,6 +29,27 @@ const Login = ({navigation}) => {
     let { password } = loginObj;
 
     const loginEvent = () => {
+        axios.post(loginURL, {
+            identity: loginObj.email,
+            password: loginObj.password
+        }).then(
+            (res) => {
+                //console.log(res.data)
+                setuserdata({
+                    ...userdata,
+                    accessToken: res.data.access_token, 
+                    refreshToken: res.data.refresh_token,
+                    userObject: res.data.user
+                })
+                console.log('userdata: ', userdata)
+                transition()
+            }
+        ).catch(
+            (err) => console.log(err)
+        )
+    }
+
+    const transition = () => {
         navigation.navigate('Central')
     }
 

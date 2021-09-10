@@ -4,7 +4,7 @@ import InputBox from '../components/inputbox/InputBox'
 import Chats from '../Assets/dummy-data/Chats'
 import TextMessage from '../components/messages/TextMessage'
 
-const ChatRoomScreen = () => {
+const ChatRoomScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.page}>
       <StatusBar 
@@ -12,9 +12,10 @@ const ChatRoomScreen = () => {
         barStyle='dark-content'
         backgroundColor='#fff'
       />
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
+        <Text>Hello</Text>
         
-      </View>
+      </View> */}
       <FlatList 
         data={Chats.messages}
         renderItem= {({ item }) => <TextMessage message={item}/>}
@@ -30,12 +31,13 @@ const ChatRoomScreen = () => {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F2F2F2',
   },
   header: {
     height: 50,
     flexDirection: 'row',
-    borderBottomWidth: 0.5
+    borderBottomWidth: 0.5,
+    padding: 10
   }
 })
 
