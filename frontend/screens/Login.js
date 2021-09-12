@@ -28,6 +28,26 @@ const Login = ({navigation}) => {
     const [showPassword, setshowPassword] = useState(true);
     let { password } = loginObj;
 
+    // const loginEvent = async () => {
+    //     try {
+    //         let res = await axios.post(loginURL, {
+    //             identity: loginObj.email,
+    //             password: loginObj.password
+    //         })
+    //         const { data } = res
+    //         setuserdata({
+    //             ...userdata,
+    //             accessToken: data.access_token,
+    //             refreshToken: data.refresh_token,
+    //             userObject: data.user
+    //         })
+    //         console.log('userdata: ', userdata)
+    //         transition();
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    // }
+
     const loginEvent = () => {
         axios.post(loginURL, {
             identity: loginObj.email,

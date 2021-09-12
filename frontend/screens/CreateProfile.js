@@ -1,31 +1,75 @@
-import React, { useRef, useState, useContext } from "react";
-import { 
-        View, 
-        SafeAreaView,
-        Button, 
-        Text, 
-        StatusBar, 
-        Pressable, 
-        StyleSheet,
-        Image, 
-        TextInput} from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
-import ImagePicker from 'react-native-image-crop-picker';
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import Fontisto from 'react-native-vector-icons/Fontisto'
+import React, { useState, useRef, useContext } from 'react'
+import { View, Text, StyleSheet, Pressable, TextInput, Image } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
+import lightTheme from '../Theme/colors'
+import RBSheet from "react-native-raw-bottom-sheet"
+import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Button, Menu, Divider, Provider } from 'react-native-paper'
 import RNPickerSelect from 'react-native-picker-select';
-import lightTheme from "../Theme/colors";
-import UserProfileContext from "../components/context/UserProfileContext";
+import Fontisto from 'react-native-vector-icons/Fontisto'
+import UserProfileContext from '../components/context/UserProfileContext'
+import ImagePicker from 'react-native-image-crop-picker';
+import axios from 'axios'
+import UserDataContext from '../components/context/UserDataContext'
 
-const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
-'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
- 
+
 const CreateProfile = ({navigation}) => {
-    const {userprofile, setuserprofile} = useContext(UserProfileContext);
-    const {username, age, gender, profilepic} = userprofile
-    const [image, setimage] = useState(avatars[Math.floor(Math.random() * 2)])
-
+    const {userdata} = useContext(UserDataContext)
+    const {userObject} = userdata
+    const URL = 'https://datex-server.herokuapp.com/api/auth/user/create_profile/';
+    const { userprofile, setuserprofile } = useContext(UserProfileContext)
+    const { username, age, phone, gender, profilepic } = userprofile
+    const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
+    'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-girls-avatars-png-image_6531264.jpg']
     const refRBSheet = useRef();
+    const [image, setimage] = useState(avatars[Math.floor(Math.random() * 2)])
+    const [visible, setVisible] = React.useState(false);
+
+
+    const uploadData = () => {
+        axios.post(URL, {
+            username: username,
+            age: age,
+            phone_number: phone,
+            gender: gender,
+            user_id: userObject.user_id
+        }).then(
+            res => console.log(res.data)
+        ).catch (
+            err => console.log(err)
+        )
+    }
+
+    const transition = () => {
+        navigation.navigate("Central")
+    }
+
+    // const uploadDetails = () => {
+    //     const uploadData = new FormData();
+    //     uploadData.append("username", username)
+    //     uploadData.append("age", age)
+    //     uploadData.append("phone_number", phone)
+    //     uploadData.append("gender", gender)
+    //     uploadData.append("profile_picture", {
+    //         uri: "",
+    //         name: "",
+    //         type: ""
+    //     })
+
+    //     axios.post(URL, uploadData, {
+    //         headers: {
+    //           'Content-Type': 'multipart/form-data'
+    //         }
+    //     }).then(
+    //         (res) => console.log(res.data)
+    //     ).catch(
+    //         (err) => console.log(err)
+    //     );
+    // }
+  
+    const openMenu = () => setVisible(true);
+  
+    const closeMenu = () => setVisible(false);
 
     const takePhotoFromCamera = () => {
         ImagePicker.openCamera({
@@ -36,7 +80,7 @@ const CreateProfile = ({navigation}) => {
             console.log(image);
             setimage(image.path)
             setuserprofile({...userprofile, profilepic: image.path})
-        });
+        }).catch(err => console.log(err));
         refRBSheet.current.close()  
     }
 
@@ -49,101 +93,137 @@ const CreateProfile = ({navigation}) => {
             console.log(image);
             setimage(image.path)
             setuserprofile({...userprofile, profilepic: image.path})
-        });
+        }).catch(err => console.log(err));
         refRBSheet.current.close()
     }
 
-    const profileSubmit = () => {
-        navigation.navigate('Central')
-    }
-
+    // const showDeets = () => {
+    //     console.log(userObject.user_id)
+    // }
+    
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                paddingHorizontal: 20,
-                paddingTop: 15,
-                backgroundColor: '#fff'
-            }}
+        <LinearGradient
+            colors={[lightTheme.primaryColor, lightTheme.colorAccent]} 
+            style={styles.container}
         >
-            <StatusBar 
-                hidden={false}
-            />
-            <View style={{
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Image 
-                    source={{
-                        uri: image
-                    }}
-                    style={{
-                        height: 150,
-                        width: 150,
-                        borderRadius: 75
-                    }}
-                />
-                <Pressable 
-                    style={styles.editPicIcon} 
-                    onPress={() => refRBSheet.current.open()}
-                >
-                    <Ionicons 
-                        name='camera-reverse-outline' size={24} color='#fff'
-                    />
+            <View style={styles.head}>
+                <Text style={{
+                    fontSize: 32,
+                    color: '#fff',
+                    fontWeight: '700'
+                }}>Create Profile</Text>
+                <Pressable onPress={transition}>
+                    <Text style={{
+                        fontSize: 18,
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        marginTop: 15
+                    }}>Save</Text>
                 </Pressable>
             </View>
             <View style={{
-                marginTop: 50,
-                marginBottom: 10
+                marginVertical: 10
             }}>
-                <Text style={styles.textInputTitle}>Username</Text>
-                <TextInput 
-                    style={styles.textInput}
-                    value={username}
-                    onChangeText={(text) => setuserprofile({...userprofile, username: text})}
-                />
+                <View style={{
+                    alignItems: 'center'
+                }}>
+                    <Image 
+                        source={{
+                            uri: profilepic
+                        }}
+                        style={styles.profilepic}
+                    />
+                    <MaterialIcons 
+                        name='circle-edit-outline' size={30} color='#fff' onPress={() => refRBSheet.current.open()}
+                        style={{
+                            position: 'absolute',
+                            right: 2
+                        }}
+                    />
+                </View>
+                <Text style={{
+                    textAlign: 'center',
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    color: '#fff',
+                    marginTop: 5,
+                    marginBottom: 15
+                }}>PROFILE PHOTO</Text>
             </View>
-            <View style={{
-                marginBottom: 10
-            }}>
-                <Text style={styles.textInputTitle}>Age</Text>
-                <TextInput 
-                    style={styles.textInput}
-                    value={age}
-                    onChangeText={(text) => setuserprofile({...userprofile, age: text})}
-                />
-            </View>
-            <View style={{
+            <View>
+                <View>
+                    <Text style={{
+                        fontSize: 14,
+                        color: '#fff',
+                        marginBottom: 5
+                    }}>Username</Text>
+                    <TextInput 
+                        style={styles.textinput}
+                        value={username}
+                        onChangeText={(value) => setuserprofile({...userprofile, username: value})}
+                    />
+                </View>
+                <View>
+                    <Text style={{
+                        fontSize: 14,
+                        color: '#fff',
+                        marginBottom: 5,
+                        marginTop: 10
+                    }}>Age</Text>
+                    <TextInput 
+                        style={styles.textinput}
+                        value={age}
+                        onChangeText={(value) => setuserprofile({...userprofile, age: value})}
+                    />
+                </View>
+                <View>
+                    <Text style={{
+                        fontSize: 14,
+                        color: '#fff',
+                        marginBottom: 5,
+                        marginTop: 10
+                    }}>Phone Number</Text>
+                    <TextInput 
+                        style={styles.textinput}
+                        value={phone}
+                        onChangeText={(value) => setuserprofile({...userprofile, phone: value})}
+                    />
+                </View>
+                <View style={{
                 marginBottom: 70
-            }}>
-                <Text style={styles.textInputTitle}>Gender</Text>
+                }}>
+                <Text style={{
+                        fontSize: 14,
+                        color: '#fff',
+                        marginBottom: 5,
+                        marginTop: 10
+                    }}>Gender</Text>
                 <RNPickerSelect
                     placeholder={{
                         label: 'select gender...',
                         value: null,
-                        color: '#c4c4c4'
+                        color: '#000'
                 }} 
+                    
                     onValueChange={(value) => {setuserprofile({...userprofile, gender: value})}}
                     useNativeAndroidPickerStyle={false}
                     items={[
-                        {label: 'Male', value: 'male'},
-                        {label: 'Female', value: 'female'}
+                        {label: 'Male', value: 'M'},
+                        {label: 'Female', value: 'F'}
                     ]}
                     style={{
                         placeholder: {
                           fontSize: 16,
-                          color: '#c4c4c4',
+                          color: '#fff',
                         },
                         inputAndroid: {
                           fontSize: 16,
                           fontWeight: 'bold',
-                          paddingHorizontal: 20,
                           paddingVertical: 10,
-                          borderBottomWidth: 0.5,
-                          borderColor: '#c4c4c4',
+                          borderBottomWidth: 1,
+                          borderColor: '#fff',
                           color: 'black',
                           marginVertical: 10,
-                          backgroundColor: '#fff'
                         },
                         iconContainer: {
                           top: 25,
@@ -154,7 +234,7 @@ const CreateProfile = ({navigation}) => {
                         return (
                             <Fontisto 
                                 name="angle-down" 
-                                size={20} color="#c4c4c4"
+                                size={20} color="#fff"
                                 style={{
                                     position: 'absolute',
                                     right: 0,
@@ -165,60 +245,79 @@ const CreateProfile = ({navigation}) => {
                       }}
                     />
             </View>
-
-            <Pressable 
-                style={styles.buttonContainer}
-                onPress={profileSubmit}
-            >
-                <Text style={styles.buttonText}>CREATE PROFILE</Text>
-            </Pressable>
-
+                {/* Enter user profile details */}
+            </View>
             <RBSheet
                 ref={refRBSheet}
                 closeOnDragDown={true}
                 closeOnPressMask={true}
                 height={300}
+                customStyles={{
+                    draggableIcon: {
+                        backgroundColor: '#fff'
+                    },
+                    container: {
+                        backgroundColor: '#f4f4f4'
+                    }
+                }}
             >
-            <View style={styles.bottomSheetContainer}>
-                <View style={styles.bottomSheetHead}>
-                    <Text style={{
-                        textAlign: 'center',
-                        fontSize: 28,
-                        fontWeight: 'bold',
-                        color: lightTheme.primaryColor
-                    }}>Upload Photo</Text>
-                    <Text style={{
-                        textAlign: 'center',
-                        fontSize: 18,
-                        color: lightTheme.primaryColor,
-                        marginBottom: 15
-                    }}>Choose Your Profile Picture</Text>
+                <View style={styles.bottomSheetContainer}>
+                    <View style={styles.bottomSheetHead}>
+                        <Text style={{
+                            textAlign: 'center',
+                            fontSize: 28,
+                            fontWeight: 'bold',
+                        }}>Upload Photo</Text>
+                        <Text style={{
+                            textAlign: 'center',
+                            fontSize: 18,
+                            marginBottom: 15
+                        }}>Choose Your Profile Picture</Text>
+                    </View>
+                    <Pressable 
+                        style={styles.bottomSheetbtn}
+                        onPress={takePhotoFromCamera}
+                    >
+                        <Text style={styles.bottomSheetbtnTxt}>TAKE PHOTO</Text>
+                    </Pressable>
+                    <Pressable 
+                        style={styles.bottomSheetbtn}
+                        onPress={choosePhotoFromLibrary}
+                    >
+                        <Text style={styles.bottomSheetbtnTxt}>CHOOSE PHOTO</Text>
+                    </Pressable>
+                    <Pressable 
+                        style={styles.bottomSheetbtn}
+                        onPress={() => refRBSheet.current.close()}
+                    >   
+                        <Text style={styles.bottomSheetbtnTxt}>CANCEL</Text>
+                    </Pressable>
                 </View>
-                <Pressable 
-                    style={styles.bottomSheetbtn}
-                    onPress={takePhotoFromCamera}
-                >
-                    <Text style={styles.bottomSheetbtnTxt}>TAKE PHOTO</Text>
-                </Pressable>
-                <Pressable 
-                    style={styles.bottomSheetbtn}
-                    onPress={choosePhotoFromLibrary}
-                >
-                    <Text style={styles.bottomSheetbtnTxt}>CHOOSE PHOTO</Text>
-                </Pressable>
-                <Pressable 
-                    style={styles.bottomSheetbtn}
-                    onPress={() => refRBSheet.current.close()}
-                >
-                    <Text style={styles.bottomSheetbtnTxt}>CANCEL</Text>
-                </Pressable>
-            </View>
-        </RBSheet>
-        </SafeAreaView>
-  );
+            </RBSheet>
+        </LinearGradient>
+    )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingHorizontal: 20,
+        paddingTop: 10
+    },
+    head: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 10,
+    },
+    textinput: {
+      borderBottomWidth: 1,
+      borderColor: '#fff'  
+    },
+    profilepic: {
+        height: 160,
+        width: 160,
+        borderRadius: 80,
+    },
     bottomSheetContainer: {
         paddingHorizontal: 15,
     },
@@ -231,49 +330,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: lightTheme.primaryColor
     },
     bottomSheetbtnTxt: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#fff'
     },
-    editPicIcon: {
-        position: 'absolute',
-        right: 80,
-        bottom: 15,
-        height: 45,
-        width: 45,
-        borderRadius: 22,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: lightTheme.primaryColor
-    },
-    textInputTitle: {
-        fontSize: 16,
-        color: lightTheme.primaryColor
-    },
-    textInput: {
-        borderWidth: 1,
-        borderRadius: 25,
-        borderColor: '#c4c4c4',
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginVertical: 10,
-        paddingLeft: 15
-    },
-    buttonContainer: {
-        marginBottom: 50,
-        height: 50,
-        borderRadius: 25,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: lightTheme.primaryColor
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 18
-    }
 })
+export default CreateProfile
 
-export default CreateProfile;
+

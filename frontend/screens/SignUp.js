@@ -14,24 +14,44 @@ const {height, width} = Dimensions.get('screen')
 const SignUp = ({navigation}) => {
     const signupURL = 'https://datex-server.herokuapp.com/api/auth/signup/';
     const {userdata, setuserdata} = React.useContext(UserDataContext)
-    const {username, email, password} = userdata
+    const {username, email, password, userObject} = userdata
 
     const [showPassword, setshowPassword] = useState(false)
 
-    const signUpEvent = () => {
-        axios.post(signupURL, {
-            username: username,
-            email: email,
-            password: password
-        }).then(
-            (res) => {
-                console.log(res.data)
-                console.log(userdata)
-            }
-        ).catch(
-            (err) => console.log(err)
-        )
+    const signUpEvent = async () => {
+        try {
+            let res = await axios.post(signupURL, {
+                email: email,
+                password: password
+            })
+            const { data } = res
+            setuserdata({...userdata, userObject: data.user})
+            console.log(data)
+            console.log(userdata)
+        } catch (err) {
+            console.log(err)
+        }
     } 
+    // const signUpEvent = () => {
+    //     axios.post(signupURL, {
+    //         email: email,
+    //         password: password
+    //     }).then(
+    //         (res) => {
+    //             setuserdata({...userdata, userObject: res.data.user})
+    //             console.log(res.data)
+    //             console.log(userdata)
+    //         }
+    //     ).catch(
+    //         (err) => console.log(err)
+    //     )
+
+    // } 
+
+    const transition = () => {
+        signUpEvent()
+        navigation.navigate('Profile')
+    }
 
     return (
         <LinearGradient
@@ -51,23 +71,6 @@ const SignUp = ({navigation}) => {
                     <Text style={styles.signuptxt}>SignUp</Text>
                 </View>
                 <View style={{flex: 3, paddingTop: 30}}>
-                    <View style={styles.input}>
-                        <FontAwesome 
-                            name='user'
-                            size={20}
-                            color={lightTheme.light}
-                            style={styles.userIcon}
-                        />
-                        <TextInput 
-                            placeholder='Username'
-                            placeholderTextColor={lightTheme.light}
-                            autoCompleteType='off'
-                            autoCorrect={false}
-                            style={styles.txtInput}
-                            value={username}
-                            onChangeText={(text) => setuserdata({...userdata, username: text})}
-                        />
-                    </View>
                     <View style={styles.input}>
                         <FontAwesome 
                             name='envelope'
@@ -132,7 +135,7 @@ const SignUp = ({navigation}) => {
                             }
                         </View>
                     </View>
-                    <Pressable onPress= {() => signUpEvent()}>
+                    <Pressable onPress= {transition}>
                         <View style={styles.btnContainer}>
                             <Text style={styles.btnText}>SIGNUP</Text>
                         </View>

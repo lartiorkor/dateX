@@ -1,10 +1,11 @@
 import React from 'react'
 
 const UserProfileContext = React.createContext({
+    profilepic: '',
     username: '',
     age: '',
-    gender: '',
-    profilepic: ''
+    phone: '',
+    gender: ''
 })
 
 export default UserProfileContext;

@@ -20,7 +20,6 @@ const avatars = ['https://png.pngtree.com/png-clipart/20210718/original/pngtree-
 
 const App = () => {
   const [userdata, setuserdata] = useState({
-    username: '',
     email: '',
     password: '',
     accessToken: '',
@@ -29,10 +28,11 @@ const App = () => {
   })
 
   const [userprofile, setuserprofile] = useState({
-    name: '',
+    username: '',
     age: '',
-    gender: '',
-    profilepic: avatars[Math.random() * 2]
+    phone: '',
+    profilepic: avatars[Math.random() * 2],
+    gender: ''
   })
 
   return (
@@ -52,9 +52,7 @@ const App = () => {
           headerShown: false
         }}/>
         <Stack.Screen name='Profile' component={CreateProfile} options={{
-          headerTitle: 'Create Profile',
-          headerTitleAlign: 'center',
-          headerLeft: null
+          headerShown: false
         }}/>
         <Stack.Screen name='Central' component={Central} options={{
           headerShown: false
