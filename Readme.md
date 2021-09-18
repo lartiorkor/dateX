@@ -186,11 +186,9 @@ ON DELETE NO ACTION ON UPDATE NO ACTION
 ## CHAPTER 4 – CONCLUSIONS
 ### 4.1 - Conclusions
 
-### 4.2 - References
+### 4.2 - Contributors 
 
-### 4.3 - Contributors 
-
-### 4.4 - License
+### 4.3 - License
 >You can check out the full license [Here](LICENSE)
 
 This project is licensed under the terms of the MIT License.
