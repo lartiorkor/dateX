@@ -17,27 +17,30 @@ const AppTheme = {
         tabInactive: '#748c94',
         hpText: 'grey',
         txtColor: 'black',
-        button: '#dbdbdb',
+        button: '#fc054b',
         btnText: 'black',
         editcamicon: '#ff695e',
         headerbc: 'black',
-        bottomSheetBg: '#fff'
+        bottomSheetBg: '#fff',
+        defaultbg: '#e6e6e6'
     },
     darkTheme: {
         name: 'dark',
         primaryColor: '#8095BF',
         colorAccent: '#8095BF',
-        backgroundColor: '#00010D',
-        tabColor: '#0A0B0D',
-        tabActive: '#8095BF',
-        tabInactive: '#6F7073',
+        backgroundColor: '#0D0E0F',
+        tabColor: '#0D0E0F',
+        tabActive: '#B1BECC',
+        tabInactive: '#2E3135',
         txtColor: 'white',
         hpText: 'grey',
-        button: '#0E1621',
+        button: '#2E3135',
         btnText: 'white',
         editcamicon: '#D9D3C7',
         headerbc: '#8095BF',
-        bottomSheetBg: '#0E1621'
+        bottomSheetBg: '#0E1621',
+        defaultbg: '#1B1D1F',
+        light: 'white'
     }
 }
 

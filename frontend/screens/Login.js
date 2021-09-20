@@ -163,7 +163,7 @@ const Login = ({navigation}) => {
                         fontWeight: '600'
                     }}>Forgot Password?</Text>
                 </TouchableOpacity>
-                <Pressable style={styles.btnContainer} onPress={loginEvent}>
+                <Pressable style={styles.btnContainer} onPress={transition}>
                     <Text style={styles.btnText}>SIGN IN</Text>
                 </Pressable>
                 <View style={{

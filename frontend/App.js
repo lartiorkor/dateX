@@ -11,7 +11,8 @@ import lightTheme from './Theme/colors'
 import Central from './screens/Central'
 import UserDataContext from './components/context/UserDataContext'
 import UserProfileContext from './components/context/UserProfileContext'
-
+import ThemeContext from './components/context/ThemeContext'
+import AppTheme from './Theme/AppTheme'
 
 const Stack = createStackNavigator();
 
@@ -35,10 +36,17 @@ const App = () => {
     gender: ''
   })
 
+  const [theme, settheme] = useState('lightTheme');
+  const currentTheme = AppTheme[theme];
+  const toggleTheme = () => {
+   settheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')
+  }
+
   return (
     <UserDataContext.Provider value={{userdata: userdata, setuserdata: setuserdata}}>
       <UserProfileContext.Provider value={{userprofile: userprofile, setuserprofile: setuserprofile}}>
-      <NavigationContainer>
+        <ThemeContext.Provider value={{currentTheme: currentTheme, toggleTheme: toggleTheme}}>
+        <NavigationContainer>
       <Stack.Navigator initialRouteName='Welcome'>
         <Stack.Screen 
           name='Welcome' component={WelcomeScreen} options={{
@@ -59,6 +67,7 @@ const App = () => {
         }}/>
       </Stack.Navigator>
     </NavigationContainer>
+        </ThemeContext.Provider>
       </UserProfileContext.Provider>
     </UserDataContext.Provider>
   )

@@ -3,15 +3,18 @@
 // be sent to after logging in or
 // signing up
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text, StyleSheet, Image} from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from './Home';
 import ChatRoomScreen from './ChatRoomScreen';
+import ChangePassword from './ChangePassword';
+import ThemeContext from '../components/context/ThemeContext';
 
 const CentralStack = createStackNavigator();
 
 const Central = () => {
+  const { currentTheme } = useContext(ThemeContext);
   return(
     <CentralStack.Navigator initialRouteName='Home' screenOptions={{
       headerShown: false
@@ -25,7 +28,13 @@ const Central = () => {
             <Text style={styles.text}>Whats Good</Text>
           </View>
         ),
-        
+      }}/>
+      <CentralStack.Screen name='ChangePassword' component={ChangePassword} options={{
+        headerShown: true,
+        title: '',
+        headerStyle: {
+          backgroundColor: currentTheme.backgroundColor
+        }
       }}/>
     </CentralStack.Navigator>
   )

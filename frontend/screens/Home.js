@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -16,13 +16,9 @@ import SettingsScreen from './SettingsScreen'
 const Tab = createBottomTabNavigator();
 
 const Home = () => {
-    const [theme, settheme] = useState('lightTheme');
-    const currentTheme = AppTheme[theme];
-    const toggleTheme = () => {
-        settheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')
-    }
+    const { currentTheme } = useContext(ThemeContext);
+    
     return (
-        <ThemeContext.Provider value={{currentTheme: currentTheme, toggleTheme: toggleTheme}}>
             <Tab.Navigator initialRouteName='Match' tabBarOptions={{
                 showLabel: false,
                 style: {
@@ -74,7 +70,6 @@ const Home = () => {
                     }}
                 />
             </Tab.Navigator>
-        </ThemeContext.Provider>
     )
 }
 
