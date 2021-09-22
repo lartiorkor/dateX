@@ -188,6 +188,10 @@ ON DELETE NO ACTION ON UPDATE NO ACTION
 ---
 ## CHAPTER 4 – CONCLUSIONS
 ### 4.1 - Conclusions
+Dating apps are transforming sexuality and intimate relationships in profound ways. They can enable fun, empowering connections to be formed between individuals who likely would not have met any other way. 
+Our project was able to accomplish this task of providing a user-friendly dating app for students on campus, incorporating random matching algorithms and speed dating.
+It is important to understand the impact online dating has on a person’s social abilities since many users feel most confident hiding behind a cell phone screen. 
+It is impossible to determine how this will impact later generations, but presumably, based off of the information gained from past research, the concept of in person dating will become part of the past and online dating applications will dominate the dating realm more than they already do. This will impact a variety of things, but mostly it will impact the way in which we communicate with one another.
 
 ### 4.2 - Contributors 
 * Lartey Jessica Lartiorkor
