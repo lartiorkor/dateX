@@ -118,9 +118,11 @@ Apart from the functional part of the software, there are non-functional parts t
 ### 2.3 – Architectural design of the proposed system
 ### 2.3.1 – Components Design
 ### 2.3.1.1 – Database Design
+![IMG-20210914-WA0028](https://user-images.githubusercontent.com/86114969/134418271-f1898b8d-ac0a-455e-80e4-fd4d185e9f70.jpg)
 
 
 ### 2.3.1.2 – User interface Design
+![IMG-20210916-WA0009](https://user-images.githubusercontent.com/86114969/134418518-330e75f9-3b03-4f6a-8e13-4a55f903ba5b.jpg)
 
 ---
 ---
@@ -130,9 +132,7 @@ This application was built using these frameworks
 * React
 * Node
 
-### 3.1 – APPLICATION FEATURES
-
-### 3.2 – DATABASE SCHEMES
+### 3.1 – DATABASE SCHEMES
 ```sql
 DROP DATABASE dateX_database;
 CREATE DATABASE dateX_database;
@@ -179,7 +179,10 @@ conversation_id VARCHAR(255) NOT NULL,
 ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 ```
-### 3.3 – User interfaces
+### 3.2 – User interfaces
+![IMG-20210916-WA0014](https://user-images.githubusercontent.com/86114969/134418780-8a0f9445-f681-4b60-b5ee-8f7ff8c1a6f2.jpg)
+![IMG-20210916-WA0015](https://user-images.githubusercontent.com/86114969/134418785-2c9ea907-c0de-4cf8-a7e3-38b72ae49777.jpg)
+![IMG-20210916-WA0013](https://user-images.githubusercontent.com/86114969/134418798-d47e9cca-ce2d-4316-b4da-14f3ca8e803f.jpg)
 
 ---
 ---
@@ -187,6 +190,18 @@ ON DELETE NO ACTION ON UPDATE NO ACTION
 ### 4.1 - Conclusions
 
 ### 4.2 - Contributors 
+* Lartey Jessica Lartiorkor
+* Fiawornu Nobel
+* Boateng Kenneth
+* Dorkenoo Hope Kwashie
+* Emmanuel Miezah Egote
+* Augustine Adjalogo-Agbeko
+* Asare Baffour Samuel Nana
+* Rufai Abulfail Ahmed
+* Dadson Papa Kow
+* Busumtwi-Sam Melvin
+* Norgah Hannah
+
 
 ### 4.3 - License
 >You can check out the full license [Here](LICENSE)
