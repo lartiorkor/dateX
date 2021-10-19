@@ -20,6 +20,7 @@ import UserProfileContext from '../components/context/UserProfileContext';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import ProfilePicture from './ProfilePicture';
+import {Avatar} from 'react-native-paper';
 
 const avatars = [
   'https://png.pngtree.com/png-clipart/20210718/original/pngtree-japanese-social-media-boy-wearing-a-hat-user-avatar-png-image_6531259.jpg',
@@ -130,18 +131,9 @@ const EditProfileScreen = ({navigation}) => {
             onPress={() =>
               navigation.navigate('Profile Photo', {picture: image})
             }>
-            <Image
-              source={{
-                uri: profilepic,
-              }}
-              style={{
-                height: 150,
-                width: 150,
-                borderRadius: 75,
-              }}
-            />
+            <Avatar.Text label={username[0].toUpperCase()} />
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => refRBSheet.current.open()}
             style={{
               borderRadius: 22,
@@ -159,7 +151,7 @@ const EditProfileScreen = ({navigation}) => {
               size={24}
               color={currentTheme.backgroundColor}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View style={styles.body}>
@@ -315,12 +307,13 @@ const styles = StyleSheet.create({
     right: 130,
   },
   head: {
-    flex: 1,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 30,
   },
   body: {
-    flex: 2,
+    flex: 2.5,
     padding: 20,
   },
   textinput: {
@@ -370,7 +363,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 0.5,
-    marginBottom: 15,
+    marginBottom: 25,
   },
   bottomSheetContainer: {
     paddingHorizontal: 15,

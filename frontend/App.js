@@ -16,6 +16,16 @@ import AppTheme from './Theme/AppTheme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RootStack from './screens/RootStack';
 
+import {decode, encode} from 'base-64';
+
+if (!global.btoa) {
+  global.btoa = encode;
+}
+
+if (!global.atob) {
+  global.atob = decode;
+}
+
 const Stack = createStackNavigator();
 
 const avatar =
@@ -51,6 +61,7 @@ const App = () => {
     phone: '',
     profilepic: avatar,
     gender: '',
+    profile_id: '',
   });
 
   const [theme, settheme] = useState('lightTheme');

@@ -20,6 +20,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import axios from 'axios';
 import UserDataContext from '../components/context/UserDataContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 const URL = 'https://datex-server.herokuapp.com/api/auth/user/create_profile/';
 
@@ -33,6 +34,8 @@ const CreateProfile = ({navigation}) => {
   const refRBSheet = useRef();
   const [image, setimage] = useState(profilepic);
   const [visible, setVisible] = React.useState(false);
+
+  const [photo, setPhoto] = useState(null);
 
   async function getUserId() {
     try {
@@ -50,21 +53,31 @@ const CreateProfile = ({navigation}) => {
   }
 
   async function createProfile() {
-    console.log(userId);
     try {
-      const result = await axios.post(URL, {
-        user_id: userId,
-        username: username,
-        age: age,
-        phone_number: phone,
-        gender: gender,
-      });
+      const result = await axios.post(URL, createFormData(photo));
       console.log(result.data);
       // saveUserProfile();
-      navigation.navigate('Central');
+      // navigation.navigate('Central');
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function createFormData(photo) {
+    const {fileName, type, uri} = photo.assets[0];
+    const data = new FormData();
+    data.append('profile_picture', {
+      name: fileName,
+      type: type,
+      uri: uri,
+    });
+    data.append('user_id', userId);
+    data.append('username', username);
+    data.append('age', age);
+    data.append('phone_number', phone);
+    data.append('gender', gender);
+
+    return data;
   }
 
   // function saveUserProfile() {
@@ -116,6 +129,20 @@ const CreateProfile = ({navigation}) => {
     refRBSheet.current.close();
   };
 
+  function handleChoosePhoto() {
+    launchImageLibrary({noData: true}, response => {
+      if (response) {
+        console.log(response);
+        console.log(`image path: ${response.assets[0].uri}`);
+
+        setPhoto(response);
+      } else {
+        console.log(`no photo`);
+      }
+      refRBSheet.current.close();
+    });
+  }
+
   return (
     <LinearGradient
       colors={[lightTheme.primaryColor, lightTheme.colorAccent]}
@@ -152,7 +179,7 @@ const CreateProfile = ({navigation}) => {
           }}>
           <Image
             source={{
-              uri: profilepic,
+              uri: photo ? photo.assets[0].uri : profilepic,
             }}
             style={styles.profilepic}
           />
@@ -332,9 +359,7 @@ const CreateProfile = ({navigation}) => {
             onPress={takePhotoFromCamera}>
             <Text style={styles.bottomSheetbtnTxt}>TAKE PHOTO</Text>
           </Pressable>
-          <Pressable
-            style={styles.bottomSheetbtn}
-            onPress={choosePhotoFromLibrary}>
+          <Pressable style={styles.bottomSheetbtn} onPress={handleChoosePhoto}>
             <Text style={styles.bottomSheetbtnTxt}>CHOOSE PHOTO</Text>
           </Pressable>
           <Pressable

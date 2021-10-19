@@ -1,11 +1,25 @@
 import React from 'react';
 import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {Avatar} from 'react-native-paper';
 
-const UserSearchResult = ({username}) => {
+const UserSearchResult = ({
+  username,
+  createConversation,
+  search_user_id,
+  theme,
+}) => {
+  console.log(search_user_id);
   return (
-    <View>
-      <Pressable style={styles.container}>
-        <Text style={styles.text}>hey {username}</Text>
+    <View style={styles.container}>
+      <Avatar.Text
+        size={40}
+        label={username[0].toUpperCase()}
+        style={styles.avatar}
+      />
+      <Pressable
+        style={[styles.userRowContainer, {borderColor: theme.defaultbg}]}
+        onPress={() => createConversation(search_user_id)}>
+        <Text style={[styles.text, {color: theme.txtColor}]}>{username}</Text>
       </Pressable>
     </View>
   );
@@ -13,16 +27,25 @@ const UserSearchResult = ({username}) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10,
+    flexDirection: 'row',
+    paddingHorizontal: 7,
+    alignItems: 'center',
+  },
+  userRowContainer: {
+    paddingVertical: 20,
     marginHorizontal: 5,
-    backgroundColor: 'gray',
-    borderBottomWidth: 0.5,
-    borderColor: '#748c94',
+    backgroundColor: 'transparent',
+    flex: 1,
+    marginLeft: 20,
+    borderBottomWidth: 2,
   },
   text: {
-    fontSize: 14,
-    color: 'black',
-    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  avatar: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

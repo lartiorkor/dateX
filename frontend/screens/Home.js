@@ -4,6 +4,7 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Base64ArrayBuffer from 'base64-arraybuffer';
 
 import MessageScreen from './MessageScreen';
 import SettingsStackScreen from './SettingsStackScreen';
@@ -24,7 +25,7 @@ let getprofileurl;
 
 const Home = () => {
   const {currentTheme} = useContext(ThemeContext);
-  const {userdata} = useContext(UserDataContext);
+  const {userdata, setuserdata} = useContext(UserDataContext);
   const {userprofile, setuserprofile} = useContext(UserProfileContext);
   const {email, userId} = userdata;
 
@@ -40,7 +41,7 @@ const Home = () => {
     //   }, 1000);
 
     //   return () => clearTimeout(timer);
-  }, []);
+  }, [userId]);
 
   async function getUserId() {
     try {
@@ -48,6 +49,7 @@ const Home = () => {
       if (userId != null) {
         getprofileurl = `https://datex-server.herokuapp.com/api/auth/user/profile/${userId}`;
         console.log(`getprofileurl: ${getprofileurl}`);
+        setuserdata({...userdata, userId});
       } else {
         // do nothing
         console.log('null');
@@ -62,10 +64,18 @@ const Home = () => {
       const response = await axios.get(endpoint);
       if (response.status === 200) {
         console.log(response.data);
-        const {username, gender, age, phone_number} = response.data;
+        const {username, gender, age, phone_number, profile_id, picture} =
+          response.data;
         const new_age = String(age);
         const new_phone_number = String(phone_number);
-        setUserProfile(username, new_age, gender, new_phone_number);
+        setUserProfile(
+          username,
+          new_age,
+          gender,
+          new_phone_number,
+          profile_id,
+          picture,
+        );
       } else {
         console.log('get request not successful');
       }
@@ -74,9 +84,17 @@ const Home = () => {
     }
   }
 
-  function setUserProfile(username, age, gender, phone) {
-    setuserprofile({username, age, gender, phone});
+  function setUserProfile(
+    username,
+    age,
+    gender,
+    phone,
+    profile_id,
+    profilepic,
+  ) {
+    setuserprofile({username, age, gender, phone, profile_id, profilepic});
   }
+
   return (
     <Tab.Navigator
       initialRouteName="Match"

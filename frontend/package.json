@@ -18,6 +18,8 @@
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "axios": "^0.21.4",
+    "base-64": "^1.0.0",
+    "base64-arraybuffer": "^1.0.1",
     "moment": "^2.29.1",
     "react": "17.0.1",
     "react-moment": "^1.1.1",
@@ -41,7 +43,8 @@
     "react-native-screens": "^3.4.0",
     "react-native-simple-bottom-sheet": "^1.0.3",
     "react-native-vector-icons": "^8.1.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "socket.io-client": "^4.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

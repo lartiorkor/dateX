@@ -11,6 +11,7 @@ import {
   Image,
   Switch,
 } from 'react-native';
+import {Avatar} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ThemeContext from '../components/context/ThemeContext';
 import UserDataContext from '../components/context/UserDataContext';
@@ -74,7 +75,7 @@ const SettingsScreen = ({navigation}) => {
           </Text>
           <Pressable onPress={() => navigation.navigate('EditProfile')}>
             <View style={styles.headerPanel}>
-              <Image source={{uri: profilepic}} style={styles.profileImage} />
+              {/* <Avatar.Text size={50} label={username[0].toUpperCase()} /> */}
               <View style={styles.headerPanelTxt}>
                 <Text
                   style={{
